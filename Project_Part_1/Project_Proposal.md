@@ -3,6 +3,7 @@
 ## Team
 * Seth Perry
 * Christina Nguyen
+* Sudeep Galgali
 
 ## Title
 The Third Meal
