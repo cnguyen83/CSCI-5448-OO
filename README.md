@@ -5,6 +5,7 @@ Project repo for CSCI-5448-001B.
 ## Team Members
 * Seth Perry
 * Christina Nguyen
+* Sudeep Galgali
 
 ## Project
-Lorem ipsum
+Object oriented design of a food ordering app.
