@@ -32,3 +32,6 @@ We want to create a website where customers can submit food orders for restauran
 | UR002 | User should be able to see all the current active orders | Orders | Restaurant owner / Customer | High |
 | UR003 | Users should be able to add and edit menus for their restaurant | Store | Restaurant owner | High |
 | UR004 | Users should be able to cancel an active order | ORders |Customer / Restaurant owner | Medium |
+
+
+## Use Cases
