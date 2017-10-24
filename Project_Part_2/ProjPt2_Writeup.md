@@ -27,6 +27,7 @@ We want to create a website where customers can submit food orders for restauran
 ### User Requirements
 
 | ID | Requirement | Topic Area | Actor | Priority |
+| --- | --- | --- | --- | --- |
 | UR001 | User should be able to place an order for a specific restaurant | Orders | Customer | High |
 | UR002 | User should be able to see all the current active orders | Orders | Restaurant owner / Customer | High |
 | UR003 | Users should be able to add and edit menus for their restaurant | Store | Restaurant owner | High |
