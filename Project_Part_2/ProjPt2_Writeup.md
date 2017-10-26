@@ -54,8 +54,12 @@ We want to create a website where customers can submit food orders for restauran
 
 **ID:** UC001
 
+<<<<<<< HEAD
 
 ***Description:***
+=======
+**Description:**
+>>>>>>> 4c0988213598b44136748bd333cd2fae0a88e58a
 Customer searches for a restaurant and selects items from its menu. He is charged an amount based on the item prices in the menu. Restaurant owner ensures the items are prepared and then marks the status of the order. The customer then collects the order either from the store or from the delivery agent. 
 
 **Main Success Scenario:**
