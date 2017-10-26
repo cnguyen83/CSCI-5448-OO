@@ -54,14 +54,12 @@ We want to create a website where customers can submit food orders for restauran
 
 **ID:** UC001
 
-<<<<<<< HEAD
-**Description:**
-=======
-### Description:
->>>>>>> 2813ec1b905693f1db2b1715e80d7e8b367589be
+
+***Description:***
 Customer searches for a restaurant and selects items from its menu. He is charged an amount based on the item prices in the menu. Restaurant owner ensures the items are prepared and then marks the status of the order. The customer then collects the order either from the store or from the delivery agent. 
 
 **Main Success Scenario:**
+
 * Customer selects a restaurant.
 * Customer views the restaurant profile and menu.
 * Customer selects the desired items from the menu.
@@ -75,15 +73,18 @@ Customer searches for a restaurant and selects items from its menu. He is charge
 **Supporting Actors:** Restaurant Owner
 
 **Pre-Conditions:**
+
 * Customer must be logged in.
 * Restaurant must be marked active by Owner.
 
 **Post-Conditions:**
+
 * Customer gets his order either via delivery or store pickup.
 * Customer is charged an amount based on the item prices in the menu.
 * Order is marked complete and no longer displayed among active orders in the orders view for the restaurant as well as the customer.
 
 **Failure End Condition:**
+
 * Order is marked cancelled and no longer displayed among active orders in the orders view for the restaurant as well as the customer.
 * Customer is not charged any amount and is refunded if previously charged.
 
@@ -95,6 +96,7 @@ Customer searches for a restaurant and selects items from its menu. He is charge
 Restaurant Owner creates an account, adds the details of the restaurant and the menu. 
 
 **Main Success Scenario:**
+
 * Restaurant Manager creates an account or logs in if it already exists
 * Restaurant Manager navigates to restaurant profile
 * Restaurant Manager selects Create Menu option on the UI
@@ -105,14 +107,17 @@ Restaurant Owner creates an account, adds the details of the restaurant and the 
 **Supporting Actors:**  None
 
 **Pre-Conditions:**
+
 * Restaurant Manager should be logged in.
 * Restaurant Profile should exist.
 
 **Post-Conditions:**
+
 * The menu information associated with the restaurant is updated.
 * The restaurant manager is shown a success prompt
 
 **Failure End Condition:**
+
 * The menu information associated with the restaurant is not updated
 * The restaurant manager is shown a failed prompt
 
