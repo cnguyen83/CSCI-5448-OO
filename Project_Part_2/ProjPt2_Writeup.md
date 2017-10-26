@@ -50,14 +50,14 @@ We want to create a website where customers can submit food orders for restauran
 | NF006 | UI should confirm order with customers before sending order to restaurant owners | UX | High |
 
 ## Use Cases
-### Use Case: Placing an Order
+**Use Case:** Placing an Order
 
-### ID: UC001
+**ID:** UC001
 
-### Description:
-	Customer searches for a restaurant and selects items from its menu. He is charged an amount based on the item prices in the menu. Restaurant owner ensures the items are prepared and then marks the status of the order. The customer then collects the order either from the store or from the delivery agent. 
+**Description:**
+Customer searches for a restaurant and selects items from its menu. He is charged an amount based on the item prices in the menu. Restaurant owner ensures the items are prepared and then marks the status of the order. The customer then collects the order either from the store or from the delivery agent. 
 
-### Main Success Scenario:
+**Main Success Scenario:**
 * Customer selects a restaurant.
 * Customer views the restaurant profile and menu.
 * Customer selects the desired items from the menu.
@@ -66,48 +66,49 @@ We want to create a website where customers can submit food orders for restauran
 * Restaurant owner changes the status of the order.
 * Once the order is ready it is either delivered or stored depending on which option is selected(delivery/store pickup).
 
-### Primary Actor: Customer
+**Primary Actor:** Customer
 
-### Supporting Actors: Restaurant Owner
+**Supporting Actors:** Restaurant Owner
 
-### Pre-Conditions:
+**Pre-Conditions:**
 * Customer must be logged in.
 * Restaurant must be marked active by Owner.
 
-### Post-Conditions:
+**Post-Conditions:**
 * Customer gets his order either via delivery or store pickup.
 * Customer is charged an amount based on the item prices in the menu.
 * Order is marked complete and no longer displayed among active orders in the orders view for the restaurant as well as the customer.
 
-### Failure End Condition:
+**Failure End Condition:**
 * Order is marked cancelled and no longer displayed among active orders in the orders view for the restaurant as well as the customer.
 * Customer is not charged any amount and is refunded if previously charged.
-e Case: Creating restaurant profile and menu
 
-### ID: UC002
+**Use Case:** Creating restaurant profile and menu
 
-### Description:
+**ID:** UC002
+
+**Description:**
 Restaurant Owner creates an account, adds the details of the restaurant and the menu. 
 
-### Main Success Scenario:
+**Main Success Scenario:**
 * Restaurant Manager creates an account or logs in if it already exists
 * Restaurant Manager navigates to restaurant profile
 * Restaurant Manager selects Create Menu option on the UI
 * Restaurant Manager enters the details of the items on the UI 
 
-### Primary Actor:  Restaurant Manager
+**Primary Actor:**  Restaurant Manager
 
-### Supporting Actors:  None
+**Supporting Actors:**  None
 
-### Pre-Conditions:
+**Pre-Conditions:**
 * Restaurant Manager should be logged in.
 * Restaurant Profile should exist.
 
-### Post-Conditions:
+**Post-Conditions:**
 * The menu information associated with the restaurant is updated.
 * The restaurant manager is shown a success prompt
 
-### Failure End Condition:
+**Failure End Condition:**
 * The menu information associated with the restaurant is not updated
 * The restaurant manager is shown a failed prompt
 
