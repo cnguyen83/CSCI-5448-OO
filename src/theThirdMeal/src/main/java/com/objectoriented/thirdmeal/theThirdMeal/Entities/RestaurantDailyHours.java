@@ -1,26 +1,39 @@
 package com.objectoriented.thirdmeal.theThirdMeal.Entities;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.util.Date;
 import java.time.DayOfWeek;
 
 @Entity
 @Table(name = "RestaurantDailyHours")
-public class RestaurantDailyHours {
+public class RestaurantDailyHours extends UniqueItem
+{
 
-	private DayOfWeek _dayOfWeek;
-	private Time _startTime;
-	private Time _stopTime;
-
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "DayOfWeek")
+	private DayOfWeek _dayOfWeek;
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "StartTime")
+	private Date _startTime;
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "StopTime")
+	private Date _stopTime;
+
+	@ManyToOne
+	@JoinColumn(name = "RestaurantKey")
+	private Restaurant _restaurant;
+
 	public DayOfWeek getDayOfWeek() { return _dayOfWeek; }
 	public void setDayOfWeek(DayOfWeek dayOfWeek) { _dayOfWeek = dayOfWeek; }
 
-	@Column(name = "StartTime")
-	public Time getStartTime() { return _startTime; }
-	public void setStartTime(Time startTime) { _startTime = startTime; }
+	public Date getStartTime() { return _startTime; }
+	public void setStartTime(Date startTime) { _startTime = startTime; }
 
-	@Column(name = "StartTime")
-	public Time getStopTime() { return _stopTime; }
-	public void setStopTime(Time stopTime) { _stopTime = stopTime; }
+	public Date getStopTime() { return _stopTime; }
+	public void setStopTime(Date stopTime) { _stopTime = stopTime; }
+
+	public Restaurant getRestaurant() { return _restaurant; }
+	public void setRestaurant(Restaurant restaurant) { _restaurant = restaurant; }
 }

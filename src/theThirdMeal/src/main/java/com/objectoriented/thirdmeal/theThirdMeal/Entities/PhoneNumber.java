@@ -4,21 +4,24 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PhoneNumbers")
-public class PhoneNumber {
-
-	private short _areaCode;
-	private short _middleThreeDigits;
-	private short _lastFourDigits;
+public class PhoneNumber extends UniqueItem
+{
 
 	@Column(name = "AreaCode")
-	public short getAreaCode() { return _areaCode; }
-	public void setAreaCode(short areaCode) { _areaCode = areaCode; }
+	private int _areaCode;
 
 	@Column(name = "MiddleThreeDigits")
-	public short getMiddleThreeDigits() { return _middleThreeDigits; }
-	public void setMiddleThreeDigits(short middleThreeDigits) { _middleThreeDigits = middleThreeDigits; }
+	private int _middleThreeDigits;
 
 	@Column(name = "LastFourDigits")
-	public short getLastFourDigits() {	return _lastFourDigits; }
-	public void setLastFourDigits(short lastFourDigits) { _lastFourDigits = lastFourDigits; }
+	private int _lastFourDigits;
+
+	public int getAreaCode() { return _areaCode; }
+	public void setAreaCode(int areaCode) { _areaCode = areaCode; }
+
+	public int getMiddleThreeDigits() { return _middleThreeDigits; }
+	public void setMiddleThreeDigits(int middleThreeDigits) { _middleThreeDigits = middleThreeDigits; }
+
+	public int getLastFourDigits() {	return _lastFourDigits; }
+	public void setLastFourDigits(int lastFourDigits) { _lastFourDigits = lastFourDigits; }
 }
