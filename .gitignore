@@ -1,0 +1,24 @@
+src/theThirdMeal/target/
+!src/theThirdMeal/.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+src/theThirdMeal/.apt_generated
+src/theThirdMeal/.classpath
+src/theThirdMeal/.factorypath
+src/theThirdMeal/.project
+src/theThirdMeal/.settings
+src/theThirdMeal/.springBeans
+
+### IntelliJ IDEA ###
+src/theThirdMeal/.idea
+src/theThirdMeal/*.iws
+src/theThirdMeal/*.iml
+src/theThirdMeal/*.ipr
+
+### NetBeans ###
+src/theThirdMeal/nbproject/private/
+src/theThirdMeal/build/
+src/theThirdMeal/nbbuild/
+src/theThirdMeal/dist/
+src/theThirdMeal/nbdist/
+src/theThirdMeal/.nb-gradle/
