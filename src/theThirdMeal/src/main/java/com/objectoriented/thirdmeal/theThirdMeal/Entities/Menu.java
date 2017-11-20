@@ -5,13 +5,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "Menus")
-public class Menu extends UniqueItem
+public class Menu extends UserItem
 {
 
 	@Column(name = "Name")
 	private String _name;
 
-	@OneToMany(mappedBy = "_menu")
+	@OneToMany(mappedBy = "_menu", cascade = CascadeType.ALL)
 	private List<MenuItem> _menuItems;
 
 	@ManyToOne

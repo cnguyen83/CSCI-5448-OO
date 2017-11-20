@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Restaurants")
-public class Restaurant extends UniqueItem
+public class Restaurant extends UserItem
 {
 
 	@OneToOne
@@ -16,10 +16,10 @@ public class Restaurant extends UniqueItem
 	@JoinColumn(name = "PhoneNumberKey")
 	private PhoneNumber _phoneNumber;
 
-	@OneToMany(mappedBy = "_restaurant")
+	@OneToMany(mappedBy = "_restaurant", cascade = CascadeType.ALL)
 	private List<RestaurantDailyHours> _dailyHours;
 
-	@OneToMany(mappedBy = "_restaurant")
+	@OneToMany(mappedBy = "_restaurant", cascade = CascadeType.ALL)
 	private List<Menu> _menus;
 
 	@Column(name = "Name")

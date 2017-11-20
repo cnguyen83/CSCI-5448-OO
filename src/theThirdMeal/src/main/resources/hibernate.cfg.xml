@@ -22,6 +22,8 @@
         <mapping class="com.objectoriented.thirdmeal.theThirdMeal.Entities.PhoneNumber"/>
         <mapping class="com.objectoriented.thirdmeal.theThirdMeal.Entities.Restaurant"/>
         <mapping class="com.objectoriented.thirdmeal.theThirdMeal.Entities.RestaurantDailyHours"/>
+        <mapping class="com.objectoriented.thirdmeal.theThirdMeal.Entities.User"/>
+        <mapping class="com.objectoriented.thirdmeal.theThirdMeal.Entities.UserRole"/>
 
     </session-factory>
 </hibernate-configuration>

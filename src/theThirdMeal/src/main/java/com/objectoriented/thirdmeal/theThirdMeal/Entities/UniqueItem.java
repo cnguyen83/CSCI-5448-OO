@@ -3,7 +3,8 @@ package com.objectoriented.thirdmeal.theThirdMeal.Entities;
 import javax.persistence.*;
 
 @MappedSuperclass
-public abstract class UniqueItem {
+public abstract class UniqueItem
+{
 
 	@Id
 	@GeneratedValue

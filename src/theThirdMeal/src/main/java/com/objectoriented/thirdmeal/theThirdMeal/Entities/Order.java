@@ -5,7 +5,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "Orders")
-public class Order extends UniqueItem
+public class Order extends UserItem
 {
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -16,7 +16,7 @@ public class Order extends UniqueItem
 	@Column(name = "OrderStatus")
 	private OrderStatus _orderStatus;
 
-	@OneToMany(mappedBy = "_order")
+	@OneToMany(mappedBy = "_order", cascade = CascadeType.ALL)
 	private List<OrderItem> _orderItems;
 
 	public Date getCreatedTime() { return _createdTime; }

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "MenuItems")
-public class MenuItem extends UniqueItem
+public class MenuItem extends UserItem
 {
 
 	@Column(name = "Name")

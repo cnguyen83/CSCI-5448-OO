@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "OrderItems")
-public class OrderItem extends UniqueItem
+public class OrderItem extends UserItem
 {
 
 	@Column(name = "Quantity")

@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PhoneNumbers")
-public class PhoneNumber extends UniqueItem
+public class PhoneNumber extends UserItem
 {
 
 	@Column(name = "AreaCode")

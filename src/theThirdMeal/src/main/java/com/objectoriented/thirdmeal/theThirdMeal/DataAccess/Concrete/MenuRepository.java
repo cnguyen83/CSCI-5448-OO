@@ -3,25 +3,27 @@ package com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Concrete;
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IRepository;
 import com.objectoriented.thirdmeal.theThirdMeal.Entities.Menu;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MenuRepository implements IRepository<Menu>
 {
-	private Session _session;
-
-	public MenuRepository(Session session)
-	{
-		if(session == null || !session.isOpen())
-			throw new IllegalArgumentException("The provided session was null or not open.");
-
-		_session = session;
-	}
+	@Autowired
+	private SessionFactory _sessionFactory;
 
 	@Override
 	public boolean create(Menu object)
 	{
 		try
 		{
-			_session.save(object);
+			Session session = _sessionFactory.openSession();
+			session.beginTransaction();
+			session.save(object);
+			session.flush();
+			session.getTransaction().commit();
+			session.close();
 		}
 		catch (Exception ex)
 		{
@@ -37,7 +39,13 @@ public class MenuRepository implements IRepository<Menu>
 		Menu returnVal;
 		try
 		{
-			returnVal = _session.get(Menu.class, entityKey);
+			Session session = _sessionFactory.openSession();
+			returnVal = session.get(Menu.class, entityKey);
+
+			if(returnVal != null && returnVal.getMenuItems() != null)
+				returnVal.getMenuItems().size();
+
+			session.close();
 		}
 		catch (Exception ex)
 		{
@@ -51,7 +59,12 @@ public class MenuRepository implements IRepository<Menu>
 	{
 		try
 		{
-			_session.update(object);
+			Session session = _sessionFactory.openSession();
+			session.beginTransaction();
+			session.update(object);
+			session.flush();
+			session.getTransaction().commit();
+			session.close();
 		}
 		catch (Exception ex)
 		{
@@ -66,7 +79,12 @@ public class MenuRepository implements IRepository<Menu>
 	{
 		try
 		{
-			_session.delete(object);
+			Session session = _sessionFactory.openSession();
+			session.beginTransaction();
+			session.delete(object);
+			session.flush();
+			session.getTransaction().commit();
+			session.close();
 		}
 		catch (Exception ex)
 		{

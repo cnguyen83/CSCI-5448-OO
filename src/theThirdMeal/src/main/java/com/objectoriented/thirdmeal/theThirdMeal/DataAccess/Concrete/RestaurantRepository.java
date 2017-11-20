@@ -5,27 +5,29 @@ import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.ISearchRepo
 import com.objectoriented.thirdmeal.theThirdMeal.Entities.Menu;
 import com.objectoriented.thirdmeal.theThirdMeal.Entities.Restaurant;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class RestaurantRepository implements IRepository<Restaurant>, ISearchRepository<Restaurant>
 {
-	private Session _session;
-
-	public RestaurantRepository(Session session)
-	{
-		if(session == null || !session.isOpen())
-			throw new IllegalArgumentException("The provided session was null or not open.");
-
-		_session = session;
-	}
+	@Autowired
+	private SessionFactory _sessionFactory;
 
 	@Override
 	public boolean create(Restaurant object)
 	{
 		try
 		{
-			_session.save(object);
+			Session session = _sessionFactory.openSession();
+			session.beginTransaction();
+			session.save(object);
+			session.flush();
+			session.getTransaction().commit();
+			session.close();
 		}
 		catch (Exception ex)
 		{
@@ -41,7 +43,16 @@ public class RestaurantRepository implements IRepository<Restaurant>, ISearchRep
 		Restaurant returnVal;
 		try
 		{
-			returnVal = _session.get(Restaurant.class, entityKey);
+			Session session = _sessionFactory.openSession();
+			returnVal = session.get(Restaurant.class, entityKey);
+
+			if(returnVal != null && returnVal.getDailyHours() != null)
+				returnVal.getDailyHours().size();
+
+			if(returnVal != null && returnVal.getMenus() != null)
+				returnVal.getMenus().size();
+
+			session.close();
 		}
 		catch (Exception ex)
 		{
@@ -55,7 +66,12 @@ public class RestaurantRepository implements IRepository<Restaurant>, ISearchRep
 	{
 		try
 		{
-			_session.update(object);
+			Session session = _sessionFactory.openSession();
+			session.beginTransaction();
+			session.update(object);
+			session.flush();
+			session.getTransaction().commit();
+			session.close();
 		}
 		catch (Exception ex)
 		{
@@ -70,7 +86,12 @@ public class RestaurantRepository implements IRepository<Restaurant>, ISearchRep
 	{
 		try
 		{
-			_session.delete(object);
+			Session session = _sessionFactory.openSession();
+			session.beginTransaction();
+			session.delete(object);
+			session.flush();
+			session.getTransaction().commit();
+			session.close();
 		}
 		catch (Exception ex)
 		{

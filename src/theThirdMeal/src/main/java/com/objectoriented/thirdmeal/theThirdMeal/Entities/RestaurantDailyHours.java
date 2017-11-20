@@ -6,7 +6,7 @@ import java.time.DayOfWeek;
 
 @Entity
 @Table(name = "RestaurantDailyHours")
-public class RestaurantDailyHours extends UniqueItem
+public class RestaurantDailyHours extends UserItem
 {
 
 	@Enumerated(EnumType.ORDINAL)

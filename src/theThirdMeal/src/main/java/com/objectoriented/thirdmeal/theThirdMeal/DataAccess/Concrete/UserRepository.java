@@ -1,21 +1,26 @@
 package com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Concrete;
 
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IRepository;
-import com.objectoriented.thirdmeal.theThirdMeal.Entities.Menu;
-import com.objectoriented.thirdmeal.theThirdMeal.Entities.Order;
+import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.ISearchRepository;
+import com.objectoriented.thirdmeal.theThirdMeal.Entities.User;
+import com.objectoriented.thirdmeal.theThirdMeal.Entities.UserRole;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
-public class OrderRepository implements IRepository<Order>
+public class UserRepository implements IRepository<User>, ISearchRepository<User>
 {
 	@Autowired
 	private SessionFactory _sessionFactory;
 
 	@Override
-	public boolean create(Order object)
+	public boolean create(User object)
 	{
 		try
 		{
@@ -35,16 +40,16 @@ public class OrderRepository implements IRepository<Order>
 	}
 
 	@Override
-	public Order read(Long entityKey)
+	public User read(Long entityKey)
 	{
-		Order returnVal;
+		User returnVal;
 		try
 		{
 			Session session = _sessionFactory.openSession();
-			returnVal = session.get(Order.class, entityKey);
+			returnVal = session.get(User.class, entityKey);
 
-			if(returnVal != null && returnVal.getOrderItems() != null)
-				returnVal.getOrderItems().size();
+			if(returnVal != null && returnVal.getUserRoles() != null)
+				returnVal.getUserRoles().size();
 
 			session.close();
 		}
@@ -56,7 +61,7 @@ public class OrderRepository implements IRepository<Order>
 	}
 
 	@Override
-	public boolean update(Order object)
+	public boolean update(User object)
 	{
 		try
 		{
@@ -76,7 +81,7 @@ public class OrderRepository implements IRepository<Order>
 	}
 
 	@Override
-	public boolean delete(Order object)
+	public boolean delete(User object)
 	{
 		try
 		{
@@ -94,4 +99,28 @@ public class OrderRepository implements IRepository<Order>
 
 		return true;
 	}
+
+	@Override
+	public List<User> search(String searchString)
+	{
+		List<User> returnVal;
+		Session session = _sessionFactory.openSession();
+		returnVal = session.createQuery("from User where _username=?")
+			.setParameter(0, searchString)
+			.list();
+
+		if(returnVal != null)
+		{
+			for(User user : returnVal)
+			{
+				if(user.getUserRoles() != null)
+					user.getUserRoles().size();
+			}
+		}
+
+		session.close();
+
+		return returnVal;
+	}
+
 }

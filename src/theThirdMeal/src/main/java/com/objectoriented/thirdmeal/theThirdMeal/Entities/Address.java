@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Addresses")
-public class Address extends UniqueItem
+public class Address extends UserItem
 {
 
 	@Column(name = "StreetAddress")
