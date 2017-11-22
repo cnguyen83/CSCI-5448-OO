@@ -28,18 +28,19 @@ public class SignUpController
 	public String signupGet(Model model)
 	{
 		model.addAttribute("user", new User());
+		model.addAttribute("userRole", new UserRole());
 		return "signup";
 	}
 
 	@PostMapping("/signup")
-	public String signupPost(@ModelAttribute User user)
+	public String signupPost(@ModelAttribute User user, @ModelAttribute UserRole userRole)
 	{
 		User userToSave = new User(user.getUsername(),
 			passwordEncoder.encode(user.getPassword()),
-			Arrays.asList(new UserRole(UserRolesEnum.CUSTOMER)));
+			Arrays.asList(userRole));
 
 		if(userRepository.create(userToSave))
-			return "redirect:/login";
+			return "redirect:/hello";
 		else
 			return "error";
 	}
