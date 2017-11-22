@@ -15,16 +15,17 @@ import java.util.List;
 public class MenuRepository implements IUserItemRepository<Menu>
 {
 	@Autowired
-	private SessionFactory _sessionFactory;
+	private SessionFactory sessionFactory;
 
 	@Override
 	public boolean create(Menu object)
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
+			object.enforceRelationships();
 			session.save(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -44,7 +45,7 @@ public class MenuRepository implements IUserItemRepository<Menu>
 		Menu returnVal;
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			returnVal = session.get(Menu.class, entityKey);
 
 			if(returnVal != null)
@@ -64,9 +65,10 @@ public class MenuRepository implements IUserItemRepository<Menu>
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
+			object.enforceRelationships();
 			session.update(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -85,9 +87,10 @@ public class MenuRepository implements IUserItemRepository<Menu>
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
+			object.enforceRelationships();
 			session.delete(object);
 			session.flush();
 			session.getTransaction().commit();

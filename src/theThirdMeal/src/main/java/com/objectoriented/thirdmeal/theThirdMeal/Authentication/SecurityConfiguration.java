@@ -16,14 +16,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	@Qualifier("userDetailsService")
-	UserService _userService;
+	UserService userService;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
 		http.authorizeRequests()
-			.antMatchers("/", "/index").permitAll()
-			.antMatchers("/api").hasAuthority("CUSTOMER")
+			.antMatchers("/", "/index", "/signup").permitAll()
+			.antMatchers("/hello").hasAuthority("CUSTOMER")
 			.and()
 			.formLogin();
 	}
@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception
 	{
-		auth.userDetailsService(_userService);
+		auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
 	}
 
 	@Bean

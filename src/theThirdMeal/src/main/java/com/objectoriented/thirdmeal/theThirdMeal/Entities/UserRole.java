@@ -8,15 +8,15 @@ public class UserRole extends UserItem
 {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "UserRole", nullable = false)
-	private UserRolesEnum _role;
+	private UserRolesEnum role;
 
 	public UserRole(){}
 
 	public UserRole(UserRolesEnum role)
 	{
-		_role = role;
+		this.role = role;
 	}
 
-	public UserRolesEnum getRole() { return _role; }
-	public void setRole(UserRolesEnum role) { _role = role; }
+	public UserRolesEnum getRole() { return this.role; }
+	public void setRole(UserRolesEnum role) { this.role = role; }
 }

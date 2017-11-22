@@ -1,14 +1,11 @@
 package com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Concrete;
 
-import com.objectoriented.thirdmeal.theThirdMeal.Authentication.UserService;
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IRepository;
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.ISearchRepository;
 import com.objectoriented.thirdmeal.theThirdMeal.Entities.User;
-import com.objectoriented.thirdmeal.theThirdMeal.Entities.UserRole;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,15 +15,16 @@ import java.util.List;
 public class UserRepository implements IRepository<User>, ISearchRepository<User>
 {
 	@Autowired
-	private SessionFactory _sessionFactory;
+	private SessionFactory sessionFactory;
 
 	@Override
 	public boolean create(User object)
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
+			object.enforceRelationships();
 			session.save(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -46,7 +44,7 @@ public class UserRepository implements IRepository<User>, ISearchRepository<User
 		User returnVal;
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			returnVal = session.get(User.class, entityKey);
 
 			if(returnVal != null )
@@ -66,8 +64,9 @@ public class UserRepository implements IRepository<User>, ISearchRepository<User
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
+			object.enforceRelationships();
 			session.update(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -86,8 +85,9 @@ public class UserRepository implements IRepository<User>, ISearchRepository<User
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
+			object.enforceRelationships();
 			session.delete(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -105,8 +105,8 @@ public class UserRepository implements IRepository<User>, ISearchRepository<User
 	public List<User> search(String searchString)
 	{
 		List<User> returnVal;
-		Session session = _sessionFactory.openSession();
-		returnVal = session.createQuery("from User where _username=?")
+		Session session = sessionFactory.openSession();
+		returnVal = session.createQuery("from User where username=?")
 			.setParameter(0, searchString)
 			.list();
 

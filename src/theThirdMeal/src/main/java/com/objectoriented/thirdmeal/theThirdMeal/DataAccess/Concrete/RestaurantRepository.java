@@ -18,16 +18,17 @@ import java.util.List;
 public class RestaurantRepository implements IUserItemRepository<Restaurant>, ISearchRepository<Restaurant>
 {
 	@Autowired
-	private SessionFactory _sessionFactory;
+	private SessionFactory sessionFactory;
 
 	@Override
 	public boolean create(Restaurant object)
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
+			object.enforceRelationships();
 			session.save(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -47,7 +48,7 @@ public class RestaurantRepository implements IUserItemRepository<Restaurant>, IS
 		Restaurant returnVal;
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			returnVal = session.get(Restaurant.class, entityKey);
 
 			if(returnVal != null)
@@ -67,9 +68,10 @@ public class RestaurantRepository implements IUserItemRepository<Restaurant>, IS
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
+			object.enforceRelationships();
 			session.update(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -88,9 +90,10 @@ public class RestaurantRepository implements IUserItemRepository<Restaurant>, IS
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
+			object.enforceRelationships();
 			session.delete(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -107,8 +110,8 @@ public class RestaurantRepository implements IUserItemRepository<Restaurant>, IS
 	@Override
 	public List<Restaurant> readAllForCurrentUser() {
 		List<Restaurant> returnVal;
-		Session session = _sessionFactory.openSession();
-		returnVal = session.createQuery("from Restaurant where _user._key=?")
+		Session session = sessionFactory.openSession();
+		returnVal = session.createQuery("from Restaurant where user.key=?")
 			.setParameter(0, UserService.getCurrentUser().getKey())
 			.list();
 
@@ -130,8 +133,8 @@ public class RestaurantRepository implements IUserItemRepository<Restaurant>, IS
 	public List<Restaurant> search(String searchString)
 	{
 		List<Restaurant> returnVal;
-		Session session = _sessionFactory.openSession();
-		returnVal = session.createQuery("from Restaurant where _name like ?")
+		Session session = sessionFactory.openSession();
+		returnVal = session.createQuery("from Restaurant where name like ?")
 			.setParameter(0, "%" + searchString + "%")
 			.list();
 

@@ -7,43 +7,43 @@ import javax.persistence.*;
 public class Address extends UserItem
 {
 	@Column(name = "StreetAddress", nullable = false)
-	private String _streetAddress;
+	private String streetAddress;
 
 	@Column(name = "City", nullable = false)
-	private String _city;
+	private String city;
 
 	@Column(name = "State")
-	private String _stateProvince;
+	private String stateProvince;
 
 	@Column(name = "Country", nullable = false)
-	private String _country;
+	private String country;
 
 	@Column(name = "Zip")
-	private String _zip;
+	private String zip;
 
 	public Address(){}
 
 	public Address(String streetAddress, String city, String stateProvince, String country, String zip)
 	{
-		_streetAddress = streetAddress;
-		_city = city;
-		_stateProvince = stateProvince;
-		_country = country;
-		_zip = zip;
+		this.streetAddress = streetAddress;
+		this.city = city;
+		this.stateProvince = stateProvince;
+		this.country = country;
+		this.zip = zip;
 	}
 
-	public String getStreetAddress() { return _streetAddress; }
-	public void setStreetAddress(String streetAddress) { _streetAddress = streetAddress; }
+	public String getStreetAddress() { return this.streetAddress; }
+	public void setStreetAddress(String streetAddress) { this.streetAddress = streetAddress; }
 
-	public String getCity() { return _city; }
-	public void setCity(String city) { _city = city; }
+	public String getCity() { return this.city; }
+	public void setCity(String city) { this.city = city; }
 
-	public String getStateProvince() {	return _stateProvince; }
-	public void setStateProvince(String stateProvince) { _stateProvince = stateProvince; }
+	public String getStateProvince() {	return this.stateProvince; }
+	public void setStateProvince(String stateProvince) { this.stateProvince = stateProvince; }
 
-	public String getCountry() { return _country; }
-	public void setCountry(String country) { _country = country; }
+	public String getCountry() { return this.country; }
+	public void setCountry(String country) { this.country = country; }
 
-	public String getZip() { return _zip; }
-	public void setZip(String zip) { _zip = zip; }
+	public String getZip() { return this.zip; }
+	public void setZip(String zip) { this.zip = zip; }
 }

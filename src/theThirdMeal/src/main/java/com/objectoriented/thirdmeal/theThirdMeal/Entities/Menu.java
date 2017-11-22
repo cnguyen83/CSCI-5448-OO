@@ -8,35 +8,47 @@ import java.util.List;
 public class Menu extends UserItem
 {
 	@Column(name = "Name", nullable = false)
-	private String _name;
+	private String name;
 
-	@OneToMany(mappedBy = "_menu", cascade = CascadeType.ALL)
-	private List<MenuItem> _menuItems;
+	@OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
+	private List<MenuItem> menuItems;
 
 	@ManyToOne
 	@JoinColumn(name = "RestaurantKey", nullable = false)
-	private Restaurant _restaurant;
+	private Restaurant restaurant;
 
 	public Menu(){}
 
 	public Menu(String name, List<MenuItem> menuItems)
 	{
-		_name = name;
-		_menuItems = menuItems;
+		this.name = name;
+		this.menuItems = menuItems;
 	}
 
-	public String getName() { return _name;	}
-	public void setName(String name) { _name = name; }
+	public String getName() { return this.name;	}
+	public void setName(String name) { this.name = name; }
 
-	public List<MenuItem> getMenuItems() { return _menuItems; }
-	public void set_menuItems(List<MenuItem> menuItems) { _menuItems = menuItems; }
+	public List<MenuItem> getMenuItems() { return this.menuItems; }
+	public void setMenuItems(List<MenuItem> menuItems) { this.menuItems = menuItems; }
 
-	public Restaurant getRestaurant() { return _restaurant; }
-	public void setRestaurant(Restaurant restaurant) { _restaurant = restaurant; }
+	public Restaurant getRestaurant() { return this.restaurant; }
+	public void setRestaurant(Restaurant restaurant) { this.restaurant = restaurant; }
+
+	public void enforceRelationships()
+	{
+		if(this.menuItems != null)
+		{
+			for(MenuItem menuItem : this.menuItems)
+			{
+				menuItem.setMenu(this);
+				menuItem.setUser(this.user);
+			}
+		}
+	}
 
 	public void loadProperties()
 	{
-		if(_menuItems != null)
-			_menuItems.size();
+		if(this.menuItems != null)
+			this.menuItems.size();
 	}
 }

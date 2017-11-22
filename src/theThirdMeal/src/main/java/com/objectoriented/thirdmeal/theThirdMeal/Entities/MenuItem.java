@@ -7,44 +7,44 @@ import javax.persistence.*;
 public class MenuItem extends UserItem
 {
 	@Column(name = "Name", nullable = false)
-	private String _name;
+	private String name;
 
 	@Column(name = "Description")
-	private String _description;
+	private String description;
 
 	@Column(name = "Cost", nullable = false)
-	private Double _cost;
+	private Double cost;
 
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "Type", nullable = false)
-	private MenuItemType _type;
+	private MenuItemType type;
 
 	@ManyToOne
 	@JoinColumn(name = "MenuKey", nullable = false)
-	private Menu _menu;
+	private Menu menu;
 
 	public MenuItem(){}
 
 	public MenuItem(String name, String description, Double cost, MenuItemType type)
 	{
-		_name = name;
-		_description = description;
-		_cost = cost;
-		_type = type;
+		this.name = name;
+		this.description = description;
+		this.cost = cost;
+		this.type = type;
 	}
 
-	public String getName() { return _name; }
-	public void setName(String name) { _name = name; }
+	public String getName() { return this.name; }
+	public void setName(String name) { this.name = name; }
 
-	public String getDescription() { return _description; }
-	public void setDescription(String description) { _description = description; }
+	public String getDescription() { return this.description; }
+	public void setDescription(String description) { this.description = description; }
 
-	public Double getCost() { return _cost; }
-	public void setCost(Double cost) { _cost = cost; }
+	public Double getCost() { return this.cost; }
+	public void setCost(Double cost) { this.cost = cost; }
 
-	public MenuItemType getType() { return _type; }
-	public void setType(MenuItemType type) { _type = type; }
+	public MenuItemType getType() { return this.type; }
+	public void setType(MenuItemType type) { this.type = type; }
 
-	public Menu getMenu() { return _menu; }
-	public void setMenu(Menu menu) { _menu = menu; }
+	public Menu getMenu() { return this.menu; }
+	public void setMenu(Menu menu) { this.menu = menu; }
 }

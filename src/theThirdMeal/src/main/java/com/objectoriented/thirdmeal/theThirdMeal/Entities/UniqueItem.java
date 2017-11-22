@@ -8,8 +8,8 @@ public abstract class UniqueItem
 	@Id
 	@GeneratedValue
 	@Column(name = "EntityKey", nullable = false)
-	protected Long _key;
+	protected Long key;
 
-	public Long getKey() { return _key; }
-	public void setKey(Long key) { _key = key; }
+	public Long getKey() { return this.key; }
+	public void setKey(Long key) { this.key = key; }
 }

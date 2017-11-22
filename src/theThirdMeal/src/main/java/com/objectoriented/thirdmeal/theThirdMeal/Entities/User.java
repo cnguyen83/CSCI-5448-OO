@@ -7,37 +7,47 @@ import java.util.List;
 @Table(name = "Users")
 public class User extends UniqueItem
 {
-
 	@Column(name = "Username", nullable = false, unique = true)
-	protected String _username;
+	protected String username;
 
 	@Column(name = "Password", nullable = false)
-	protected String _password;
+	protected String password;
 
-	@OneToMany(mappedBy = "_user", cascade = CascadeType.ALL)
-	protected List<UserRole> _userRoles;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	protected List<UserRole> userRoles;
 
 	public User(){}
 
 	public User(String username, String password, List<UserRole> userRoles)
 	{
-		_username = username;
-		_password = password;
-		_userRoles = userRoles;
+		this.username = username;
+		this.password = password;
+		this.userRoles = userRoles;
 	}
 
-	public String getUsername() { return _username; }
-	public void setUsername(String username) { _username = username; }
+	public String getUsername() { return this.username; }
+	public void setUsername(String username) { this.username = username; }
 
-	public String getPassword() { return _password; }
-	public void setPassword(String password) { _password = password; }
+	public String getPassword() { return this.password; }
+	public void setPassword(String password) { this.password = password; }
 
-	public List<UserRole> getUserRoles() { return _userRoles; }
-	public void setUserRoles(List<UserRole> userRoles) { _userRoles = userRoles; }
+	public List<UserRole> getUserRoles() { return this.userRoles; }
+	public void setUserRoles(List<UserRole> userRoles) { this.userRoles = userRoles; }
+
+	public void enforceRelationships()
+	{
+		if(this.userRoles != null)
+		{
+			for(UserRole userRole : this.userRoles)
+			{
+				userRole.setUser(this);
+			}
+		}
+	}
 
 	public void loadProperties()
 	{
-		if(_userRoles != null)
-			_userRoles.size();
+		if(this.userRoles != null)
+			this.userRoles.size();
 	}
 }

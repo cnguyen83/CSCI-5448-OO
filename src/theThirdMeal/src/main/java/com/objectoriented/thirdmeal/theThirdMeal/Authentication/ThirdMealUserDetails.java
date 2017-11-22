@@ -8,31 +8,31 @@ import java.util.Collection;
 
 public class ThirdMealUserDetails extends User implements UserDetails
 {
+	private Collection<? extends GrantedAuthority> grantedAuthorities;
+
 	public ThirdMealUserDetails(String username, String password, Long userKey, Collection<? extends GrantedAuthority> grantedAuthorities)
 	{
-		super.setUsername(username);
-		super.setPassword(password);
-		super.setKey(userKey);
-		_grantedAuthorities = grantedAuthorities;
+		this.key = userKey;
+		this.username = username;
+		this.password = password;
+		this.grantedAuthorities = grantedAuthorities;
 	}
-
-	private Collection<? extends GrantedAuthority> _grantedAuthorities;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return _grantedAuthorities;
+		return this.grantedAuthorities;
 	}
 
 	@Override
 	public String getPassword()
 	{
-		return _password;
+		return this.password;
 	}
 
 	@Override
 	public String getUsername()
 	{
-		return _username;
+		return this.username;
 	}
 
 	@Override

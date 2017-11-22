@@ -9,54 +9,81 @@ public class Restaurant extends UserItem
 {
 	@OneToOne
 	@JoinColumn(name = "AddressKey")
-	private Address _address;
+	private Address address;
 
 	@OneToOne
 	@JoinColumn(name = "PhoneNumberKey")
-	private PhoneNumber _phoneNumber;
+	private PhoneNumber phoneNumber;
 
-	@OneToMany(mappedBy = "_restaurant", cascade = CascadeType.ALL)
-	private List<RestaurantDailyHours> _dailyHours;
+	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+	private List<RestaurantDailyHours> dailyHours;
 
-	@OneToMany(mappedBy = "_restaurant", cascade = CascadeType.ALL)
-	private List<Menu> _menus;
+	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+	private List<Menu> menus;
 
 	@Column(name = "Name", nullable = false)
-	private String _name;
+	private String name;
 
 	public Restaurant(){}
 
 	public Restaurant(String name, Address address, PhoneNumber phoneNumber,
 	                  List<RestaurantDailyHours> dailyHours, List<Menu> menus)
 	{
-		_name = name;
-		_address = address;
-		_phoneNumber = phoneNumber;
-		_dailyHours = dailyHours;
-		_menus = menus;
+		this.name = name;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.dailyHours = dailyHours;
+		this.menus = menus;
 	}
 
-	public Address getAddress(){ return _address; }
-	public void setAddress(Address address) { _address = address; }
+	public Address getAddress(){ return this.address; }
+	public void setAddress(Address address) { this.address = address; }
 
-	public PhoneNumber getPhoneNumber() { return _phoneNumber; }
-	public void setPhoneNumber(PhoneNumber phoneNumber) { _phoneNumber = phoneNumber; }
+	public PhoneNumber getPhoneNumber() { return this.phoneNumber; }
+	public void setPhoneNumber(PhoneNumber phoneNumber) { this.phoneNumber = phoneNumber; }
 
-	public String getName() { return _name; }
-	public void setName(String name) { _name = name; }
+	public String getName() { return this.name; }
+	public void setName(String name) { this.name = name; }
 
-	public List<RestaurantDailyHours> getDailyHours() { return _dailyHours; }
-	public void setDailyHours(List<RestaurantDailyHours> dailyHours) { _dailyHours = dailyHours; }
+	public List<RestaurantDailyHours> getDailyHours() { return this.dailyHours; }
+	public void setDailyHours(List<RestaurantDailyHours> dailyHours) { this.dailyHours = dailyHours; }
 
-	public List<Menu> getMenus() { return _menus; }
-	public void setMenus(List<Menu> menus) { _menus = menus; }
+	public List<Menu> getMenus() { return this.menus; }
+	public void setMenus(List<Menu> menus) { this.menus = menus; }
+
+	public void enforceRelationships()
+	{
+		if(this.dailyHours != null)
+		{
+			for(RestaurantDailyHours dailyHours : this.dailyHours)
+			{
+				dailyHours.setRestaurant(this);
+				dailyHours.setUser(this.user);
+			}
+		}
+
+		if(this.menus != null)
+		{
+			for(Menu menu : this.menus)
+			{
+				menu.setRestaurant(this);
+				menu.setUser(this.user);
+			}
+		}
+
+		if(this.address != null)
+			this.address.setUser(this.user);
+
+		if(this.phoneNumber != null)
+			this.phoneNumber.setUser(this.user);
+	}
 
 	public void loadProperties()
 	{
-		if(_dailyHours != null)
-			_dailyHours.size();
+		if(this.dailyHours != null)
+			this.dailyHours.size();
 
-		if(_menus != null)
-			_menus.size();
+		if(this.menus != null)
+			this.menus.size();
 	}
 }

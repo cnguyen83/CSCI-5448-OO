@@ -16,16 +16,17 @@ import java.util.List;
 public class OrderRepository implements IUserItemRepository<Order>
 {
 	@Autowired
-	private SessionFactory _sessionFactory;
+	private SessionFactory sessionFactory;
 
 	@Override
 	public boolean create(Order object)
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
+			object.enforceRelationships();
 			session.save(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -45,7 +46,7 @@ public class OrderRepository implements IUserItemRepository<Order>
 		Order returnVal;
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			returnVal = session.get(Order.class, entityKey);
 
 			if(returnVal != null)
@@ -65,9 +66,10 @@ public class OrderRepository implements IUserItemRepository<Order>
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
+			object.enforceRelationships();
 			session.update(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -86,9 +88,10 @@ public class OrderRepository implements IUserItemRepository<Order>
 	{
 		try
 		{
-			Session session = _sessionFactory.openSession();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
+			object.enforceRelationships();
 			session.delete(object);
 			session.flush();
 			session.getTransaction().commit();
