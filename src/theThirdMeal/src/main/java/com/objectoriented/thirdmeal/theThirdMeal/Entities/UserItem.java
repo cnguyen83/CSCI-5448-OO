@@ -9,8 +9,8 @@ public abstract class UserItem extends UniqueItem
 {
 
 	@ManyToOne
-	@JoinColumn(name = "UserKey")
-	private User _user;
+	@JoinColumn(name = "UserKey", nullable = false)
+	protected User _user;
 
 	public User getUser() { return _user; }
 	public void setUser(User user) { _user = user; }

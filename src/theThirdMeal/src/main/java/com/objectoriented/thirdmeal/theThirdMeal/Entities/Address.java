@@ -6,21 +6,31 @@ import javax.persistence.*;
 @Table(name = "Addresses")
 public class Address extends UserItem
 {
-
-	@Column(name = "StreetAddress")
+	@Column(name = "StreetAddress", nullable = false)
 	private String _streetAddress;
 
-	@Column(name = "City")
+	@Column(name = "City", nullable = false)
 	private String _city;
 
 	@Column(name = "State")
 	private String _stateProvince;
 
-	@Column(name = "Country")
+	@Column(name = "Country", nullable = false)
 	private String _country;
 
 	@Column(name = "Zip")
 	private String _zip;
+
+	public Address(){}
+
+	public Address(String streetAddress, String city, String stateProvince, String country, String zip)
+	{
+		_streetAddress = streetAddress;
+		_city = city;
+		_stateProvince = stateProvince;
+		_country = country;
+		_zip = zip;
+	}
 
 	public String getStreetAddress() { return _streetAddress; }
 	public void setStreetAddress(String streetAddress) { _streetAddress = streetAddress; }

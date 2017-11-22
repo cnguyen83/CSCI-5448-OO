@@ -7,7 +7,6 @@ import java.util.List;
 @Table(name = "Restaurants")
 public class Restaurant extends UserItem
 {
-
 	@OneToOne
 	@JoinColumn(name = "AddressKey")
 	private Address _address;
@@ -22,8 +21,20 @@ public class Restaurant extends UserItem
 	@OneToMany(mappedBy = "_restaurant", cascade = CascadeType.ALL)
 	private List<Menu> _menus;
 
-	@Column(name = "Name")
+	@Column(name = "Name", nullable = false)
 	private String _name;
+
+	public Restaurant(){}
+
+	public Restaurant(String name, Address address, PhoneNumber phoneNumber,
+	                  List<RestaurantDailyHours> dailyHours, List<Menu> menus)
+	{
+		_name = name;
+		_address = address;
+		_phoneNumber = phoneNumber;
+		_dailyHours = dailyHours;
+		_menus = menus;
+	}
 
 	public Address getAddress(){ return _address; }
 	public void setAddress(Address address) { _address = address; }
@@ -39,4 +50,13 @@ public class Restaurant extends UserItem
 
 	public List<Menu> getMenus() { return _menus; }
 	public void setMenus(List<Menu> menus) { _menus = menus; }
+
+	public void loadProperties()
+	{
+		if(_dailyHours != null)
+			_dailyHours.size();
+
+		if(_menus != null)
+			_menus.size();
+	}
 }

@@ -32,12 +32,10 @@ public class HibernateTest {
 
 	@Test
 	public void hibernateTest() {
-		SessionFactory sessionFactory = HibernateSetup.getSessionFactory();
-
 		User user = new User();
 
-		user.setUsername("hello");
-		user.setPassword("password");
+		user.setUsername("hello2");
+		user.setPassword("password2");
 
 		UserRole userRole = new UserRole();
 		userRole.setUser(user);
@@ -49,9 +47,5 @@ public class HibernateTest {
 		user.setUserRoles(userRoles);
 
 		userRepository.create(user);
-
-		UserDetails returnedUser = userService.loadUserByUsername("hello");
-
-		sessionFactory.close();
 	}
 }

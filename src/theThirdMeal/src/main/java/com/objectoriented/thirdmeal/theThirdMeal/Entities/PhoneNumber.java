@@ -6,22 +6,30 @@ import javax.persistence.*;
 @Table(name = "PhoneNumbers")
 public class PhoneNumber extends UserItem
 {
+	@Column(name = "AreaCode", nullable = false)
+	private Integer _areaCode;
 
-	@Column(name = "AreaCode")
-	private int _areaCode;
+	@Column(name = "MiddleThreeDigits", nullable = false)
+	private Integer _middleThreeDigits;
 
-	@Column(name = "MiddleThreeDigits")
-	private int _middleThreeDigits;
+	@Column(name = "LastFourDigits", nullable = false)
+	private Integer _lastFourDigits;
 
-	@Column(name = "LastFourDigits")
-	private int _lastFourDigits;
+	public PhoneNumber(){}
 
-	public int getAreaCode() { return _areaCode; }
-	public void setAreaCode(int areaCode) { _areaCode = areaCode; }
+	public PhoneNumber(Integer areaCode, Integer middleThreeDigits, Integer lastFourDigits)
+	{
+		_areaCode = areaCode;
+		_middleThreeDigits = middleThreeDigits;
+		_lastFourDigits = lastFourDigits;
+	}
 
-	public int getMiddleThreeDigits() { return _middleThreeDigits; }
-	public void setMiddleThreeDigits(int middleThreeDigits) { _middleThreeDigits = middleThreeDigits; }
+	public Integer getAreaCode() { return _areaCode; }
+	public void setAreaCode(Integer areaCode) { _areaCode = areaCode; }
 
-	public int getLastFourDigits() {	return _lastFourDigits; }
-	public void setLastFourDigits(int lastFourDigits) { _lastFourDigits = lastFourDigits; }
+	public Integer getMiddleThreeDigits() { return _middleThreeDigits; }
+	public void setMiddleThreeDigits(Integer middleThreeDigits) { _middleThreeDigits = middleThreeDigits; }
+
+	public Integer getLastFourDigits() {	return _lastFourDigits; }
+	public void setLastFourDigits(Integer lastFourDigits) { _lastFourDigits = lastFourDigits; }
 }

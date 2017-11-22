@@ -6,23 +6,32 @@ import javax.persistence.*;
 @Table(name = "MenuItems")
 public class MenuItem extends UserItem
 {
-
-	@Column(name = "Name")
+	@Column(name = "Name", nullable = false)
 	private String _name;
 
 	@Column(name = "Description")
 	private String _description;
 
-	@Column(name = "Cost")
-	private double _cost;
+	@Column(name = "Cost", nullable = false)
+	private Double _cost;
 
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "Type")
+	@Column(name = "Type", nullable = false)
 	private MenuItemType _type;
 
 	@ManyToOne
-	@JoinColumn(name = "MenuKey")
+	@JoinColumn(name = "MenuKey", nullable = false)
 	private Menu _menu;
+
+	public MenuItem(){}
+
+	public MenuItem(String name, String description, Double cost, MenuItemType type)
+	{
+		_name = name;
+		_description = description;
+		_cost = cost;
+		_type = type;
+	}
 
 	public String getName() { return _name; }
 	public void setName(String name) { _name = name; }
@@ -30,8 +39,8 @@ public class MenuItem extends UserItem
 	public String getDescription() { return _description; }
 	public void setDescription(String description) { _description = description; }
 
-	public double getCost() { return _cost; }
-	public void setCost(double cost) { _cost = cost; }
+	public Double getCost() { return _cost; }
+	public void setCost(Double cost) { _cost = cost; }
 
 	public MenuItemType getType() { return _type; }
 	public void setType(MenuItemType type) { _type = type; }

@@ -1,14 +1,18 @@
 package com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Concrete;
 
+import com.objectoriented.thirdmeal.theThirdMeal.Authentication.UserService;
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IRepository;
+import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IUserItemRepository;
 import com.objectoriented.thirdmeal.theThirdMeal.Entities.Menu;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
-public class MenuRepository implements IRepository<Menu>
+public class MenuRepository implements IUserItemRepository<Menu>
 {
 	@Autowired
 	private SessionFactory _sessionFactory;
@@ -20,6 +24,7 @@ public class MenuRepository implements IRepository<Menu>
 		{
 			Session session = _sessionFactory.openSession();
 			session.beginTransaction();
+			object.setUser(UserService.getCurrentUser());
 			session.save(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -42,8 +47,8 @@ public class MenuRepository implements IRepository<Menu>
 			Session session = _sessionFactory.openSession();
 			returnVal = session.get(Menu.class, entityKey);
 
-			if(returnVal != null && returnVal.getMenuItems() != null)
-				returnVal.getMenuItems().size();
+			if(returnVal != null)
+				returnVal.loadProperties();
 
 			session.close();
 		}
@@ -61,6 +66,7 @@ public class MenuRepository implements IRepository<Menu>
 		{
 			Session session = _sessionFactory.openSession();
 			session.beginTransaction();
+			object.setUser(UserService.getCurrentUser());
 			session.update(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -81,6 +87,7 @@ public class MenuRepository implements IRepository<Menu>
 		{
 			Session session = _sessionFactory.openSession();
 			session.beginTransaction();
+			object.setUser(UserService.getCurrentUser());
 			session.delete(object);
 			session.flush();
 			session.getTransaction().commit();
@@ -92,5 +99,10 @@ public class MenuRepository implements IRepository<Menu>
 		}
 
 		return true;
+	}
+
+	@Override
+	public List<Menu> readAllForCurrentUser() {
+		return null;
 	}
 }

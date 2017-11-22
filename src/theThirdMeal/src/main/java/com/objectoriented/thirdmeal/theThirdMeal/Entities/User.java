@@ -8,14 +8,23 @@ import java.util.List;
 public class User extends UniqueItem
 {
 
-	@Column(name = "Username")
-	private String _username;
+	@Column(name = "Username", nullable = false, unique = true)
+	protected String _username;
 
-	@Column(name = "Password")
-	private String _password;
+	@Column(name = "Password", nullable = false)
+	protected String _password;
 
 	@OneToMany(mappedBy = "_user", cascade = CascadeType.ALL)
-	private List<UserRole> _userRoles;
+	protected List<UserRole> _userRoles;
+
+	public User(){}
+
+	public User(String username, String password, List<UserRole> userRoles)
+	{
+		_username = username;
+		_password = password;
+		_userRoles = userRoles;
+	}
 
 	public String getUsername() { return _username; }
 	public void setUsername(String username) { _username = username; }
@@ -25,4 +34,10 @@ public class User extends UniqueItem
 
 	public List<UserRole> getUserRoles() { return _userRoles; }
 	public void setUserRoles(List<UserRole> userRoles) { _userRoles = userRoles; }
+
+	public void loadProperties()
+	{
+		if(_userRoles != null)
+			_userRoles.size();
+	}
 }

@@ -8,22 +8,30 @@ import java.time.DayOfWeek;
 @Table(name = "RestaurantDailyHours")
 public class RestaurantDailyHours extends UserItem
 {
-
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "DayOfWeek")
+	@Column(name = "DayOfWeek", nullable = false)
 	private DayOfWeek _dayOfWeek;
 
 	@Temporal(TemporalType.TIME)
-	@Column(name = "StartTime")
+	@Column(name = "StartTime", nullable = false)
 	private Date _startTime;
 
 	@Temporal(TemporalType.TIME)
-	@Column(name = "StopTime")
+	@Column(name = "StopTime", nullable = false)
 	private Date _stopTime;
 
 	@ManyToOne
-	@JoinColumn(name = "RestaurantKey")
+	@JoinColumn(name = "RestaurantKey", nullable = false)
 	private Restaurant _restaurant;
+
+	public RestaurantDailyHours(){}
+
+	public RestaurantDailyHours(DayOfWeek dayOfWeek, Date startTime, Date stopTime)
+	{
+		_dayOfWeek = dayOfWeek;
+		_startTime = startTime;
+		_stopTime = stopTime;
+	}
 
 	public DayOfWeek getDayOfWeek() { return _dayOfWeek; }
 	public void setDayOfWeek(DayOfWeek dayOfWeek) { _dayOfWeek = dayOfWeek; }

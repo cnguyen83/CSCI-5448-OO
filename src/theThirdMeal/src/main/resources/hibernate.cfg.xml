@@ -12,7 +12,7 @@
         <property name="connection.pool_size">10</property>
         <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <mapping class="com.objectoriented.thirdmeal.theThirdMeal.Entities.Address"/>
         <mapping class="com.objectoriented.thirdmeal.theThirdMeal.Entities.Menu"/>

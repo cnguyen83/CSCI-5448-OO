@@ -1,5 +1,6 @@
 package com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Concrete;
 
+import com.objectoriented.thirdmeal.theThirdMeal.Authentication.UserService;
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IRepository;
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.ISearchRepository;
 import com.objectoriented.thirdmeal.theThirdMeal.Entities.User;
@@ -48,8 +49,8 @@ public class UserRepository implements IRepository<User>, ISearchRepository<User
 			Session session = _sessionFactory.openSession();
 			returnVal = session.get(User.class, entityKey);
 
-			if(returnVal != null && returnVal.getUserRoles() != null)
-				returnVal.getUserRoles().size();
+			if(returnVal != null )
+				returnVal.loadProperties();
 
 			session.close();
 		}
@@ -113,8 +114,8 @@ public class UserRepository implements IRepository<User>, ISearchRepository<User
 		{
 			for(User user : returnVal)
 			{
-				if(user.getUserRoles() != null)
-					user.getUserRoles().size();
+				if(user != null)
+					user.loadProperties();
 			}
 		}
 

@@ -4,9 +4,9 @@ import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.ISearchRepo
 import com.objectoriented.thirdmeal.theThirdMeal.Entities.User;
 import com.objectoriented.thirdmeal.theThirdMeal.Entities.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -41,7 +41,13 @@ public class UserService implements UserDetailsService
 		}
 	}
 
-	private UserDetails convertUserToUserDetails(User user) throws Exception
+	public static User getCurrentUser()
+	{
+		return (ThirdMealUserDetails)SecurityContextHolder.getContext()
+			.getAuthentication().getPrincipal();
+	}
+
+	private ThirdMealUserDetails convertUserToUserDetails(User user) throws Exception
 	{
 		if(user == null)
 			throw new Exception("The user to convert was null.");
@@ -51,9 +57,8 @@ public class UserService implements UserDetailsService
 		if(userRoles == null)
 			throw new Exception("The user did not have any roles.");
 
-		return new org.springframework.security.core.userdetails.User(user.getUsername(),
-			user.getPassword(), true, true, true, true,
-			convertUserRolesToGrantedAuthority(userRoles));
+		return new ThirdMealUserDetails(user.getUsername(), user.getPassword(),
+			user.getKey(), convertUserRolesToGrantedAuthority(userRoles));
 	}
 
 	private List<GrantedAuthority> convertUserRolesToGrantedAuthority(List<UserRole> userRoles)
