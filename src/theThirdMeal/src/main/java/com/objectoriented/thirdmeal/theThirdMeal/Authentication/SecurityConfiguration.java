@@ -1,5 +1,6 @@
 package com.objectoriented.thirdmeal.theThirdMeal.Authentication;
 
+import com.objectoriented.thirdmeal.theThirdMeal.Entities.UserRolesEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -22,10 +23,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception
 	{
 		http.authorizeRequests()
-			.antMatchers("/", "/index", "/signup").permitAll()
-			.antMatchers("/hello").hasAuthority("CUSTOMER")
+			.antMatchers("/signup", "/hello").permitAll()
+			.antMatchers("/", "/index").authenticated()
+			.antMatchers( "/customerHome").hasAuthority(UserRolesEnum.CUSTOMER.name())
+			.antMatchers("/restaurantOwnerHome").hasAuthority(UserRolesEnum.RESTAURANT_OWNER.name())
 			.and()
-			.formLogin();
+			.formLogin()
+			.loginPage("/login").permitAll();
 	}
 
 	@Autowired

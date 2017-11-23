@@ -58,7 +58,7 @@ public class UserService implements UserDetailsService
 			throw new Exception("The user did not have any roles.");
 
 		return new ThirdMealUserDetails(user.getUsername(), user.getPassword(),
-			user.getKey(), convertUserRolesToGrantedAuthority(userRoles));
+			user.getKey(), userRoles, convertUserRolesToGrantedAuthority(userRoles));
 	}
 
 	private List<GrantedAuthority> convertUserRolesToGrantedAuthority(List<UserRole> userRoles)

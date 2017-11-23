@@ -5,17 +5,18 @@
 </head>
 <body>
     <form action="#" th:action="@{/signup}" method="post">
-        <p>Username: <input type="text" th:field="${user.username}" /></p>
-        <p>Password: <input type="password" th:field="${user.password}" /></p>
-        <p>User Type:
-            <select th:field="${userRole.role}">
-                <option th:each="role : ${T(com.objectoriented.thirdmeal.theThirdMeal.Entities.UserRolesEnum).values()}"
-                    th:value="${role}"
-                    th:text="${role.display()}">
-                </option>
-            </select>
-        </p>
-        <p><input type="submit" value="Submit"/> </p>
+        <label for="username">Username:</label>
+        <input type="text" th:field="${user.username}" id="username" />
+        <label for="password">Password:</label>
+        <input type="password" th:field="${user.password}" id="password" />
+        <label for="userRole">User Type:</label>
+        <select th:field="${userRole.role}" id="userRole" >
+            <option th:each="role : ${T(com.objectoriented.thirdmeal.theThirdMeal.Entities.UserRolesEnum).values()}"
+                th:value="${role}"
+                th:text="${role.display()}">
+            </option>
+        </select>
+        <input type="submit" value="Submit"/>
     </form>
 </body>
 </html>
