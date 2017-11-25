@@ -46,6 +46,6 @@ public class HibernateTest {
 
 		user.setUserRoles(userRoles);
 
-		userRepository.create(user);
+		userRepository.save(user);
 	}
 }

@@ -5,13 +5,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "Restaurants")
-public class Restaurant extends UserItem
+public class Restaurant extends UserItem implements PersistableEntity
 {
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "AddressKey")
 	private Address address;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PhoneNumberKey")
 	private PhoneNumber phoneNumber;
 
@@ -24,7 +24,11 @@ public class Restaurant extends UserItem
 	@Column(name = "Name", nullable = false)
 	private String name;
 
-	public Restaurant(){}
+	public Restaurant()
+	{
+		address = new Address();
+		phoneNumber = new PhoneNumber();
+	}
 
 	public Restaurant(String name, Address address, PhoneNumber phoneNumber,
 	                  List<RestaurantDailyHours> dailyHours, List<Menu> menus)

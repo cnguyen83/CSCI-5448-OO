@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Menus")
-public class Menu extends UserItem
+public class Menu extends UserItem implements PersistableEntity
 {
 	@Column(name = "Name", nullable = false)
 	private String name;

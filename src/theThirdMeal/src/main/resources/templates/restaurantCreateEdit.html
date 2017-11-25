@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <form action="#" th:action="@{/restaurantCreateEdit}" method="post">
+        <input type="hidden" th:field="${restaurant.key}" id="key" />
+        <label for="name">Name:</label>
+        <input type="text" th:field="${restaurant.name}" id="name" />
+        <label for="streetAddress">Street Address:</label>
+        <input type="text" th:field="${restaurant.address.streetAddress}" id="streetAddress" />
+        <label for="city">City:</label>
+        <input type="text" th:field="${restaurant.address.city}" id="city" />
+        <label for="stateProvince">State/Province:</label>
+        <input type="text" th:field="${restaurant.address.stateProvince}" id="stateProvince" />
+        <label for="country">Country:</label>
+        <input type="text" th:field="${restaurant.address.country}" id="country" />
+        <label for="zip">Zip:</label>
+        <input type="text" th:field="${restaurant.address.zip}" id="zip" />
+        <label>Phone Number:</label>
+        <input type="text" th:field="${restaurant.phoneNumber.areaCode}" id="areaCode" />
+        <input type="text" th:field="${restaurant.phoneNumber.middleThreeDigits}" id="middleThreeDigits" />
+        <input type="text" th:field="${restaurant.phoneNumber.lastFourDigits}" id="lastFourDigits" />
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
+</html>

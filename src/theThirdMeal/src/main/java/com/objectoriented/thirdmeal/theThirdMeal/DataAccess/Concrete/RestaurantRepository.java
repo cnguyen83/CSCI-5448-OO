@@ -21,7 +21,7 @@ public class RestaurantRepository implements IUserItemRepository<Restaurant>, IS
 	private SessionFactory sessionFactory;
 
 	@Override
-	public boolean create(Restaurant object)
+	public boolean save(Restaurant object)
 	{
 		try
 		{
@@ -29,7 +29,7 @@ public class RestaurantRepository implements IUserItemRepository<Restaurant>, IS
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
 			object.enforceRelationships();
-			session.save(object);
+			session.saveOrUpdate(object);
 			session.flush();
 			session.getTransaction().commit();
 			session.close();
@@ -61,28 +61,6 @@ public class RestaurantRepository implements IUserItemRepository<Restaurant>, IS
 			return null;
 		}
 		return returnVal;
-	}
-
-	@Override
-	public boolean update(Restaurant object)
-	{
-		try
-		{
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
-			object.setUser(UserService.getCurrentUser());
-			object.enforceRelationships();
-			session.update(object);
-			session.flush();
-			session.getTransaction().commit();
-			session.close();
-		}
-		catch (Exception ex)
-		{
-			return false;
-		}
-
-		return true;
 	}
 
 	@Override

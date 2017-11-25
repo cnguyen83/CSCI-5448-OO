@@ -26,7 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/signup", "/hello").permitAll()
 			.antMatchers("/", "/index").authenticated()
 			.antMatchers( "/customerHome").hasAuthority(UserRolesEnum.CUSTOMER.name())
-			.antMatchers("/restaurantOwnerHome").hasAuthority(UserRolesEnum.RESTAURANT_OWNER.name())
+			.antMatchers("/restaurantOwnerHome", "/restaurantCreateEdit").hasAuthority(UserRolesEnum.RESTAURANT_OWNER.name())
 			.and()
 			.formLogin()
 			.loginPage("/login").permitAll();

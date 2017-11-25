@@ -5,7 +5,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "Orders")
-public class Order extends UserItem
+public class Order extends UserItem implements PersistableEntity
 {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CreatedTime", nullable = false)

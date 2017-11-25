@@ -18,7 +18,7 @@ public class MenuRepository implements IUserItemRepository<Menu>
 	private SessionFactory sessionFactory;
 
 	@Override
-	public boolean create(Menu object)
+	public boolean save(Menu object)
 	{
 		try
 		{
@@ -26,7 +26,7 @@ public class MenuRepository implements IUserItemRepository<Menu>
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
 			object.enforceRelationships();
-			session.save(object);
+			session.saveOrUpdate(object);
 			session.flush();
 			session.getTransaction().commit();
 			session.close();
@@ -58,28 +58,6 @@ public class MenuRepository implements IUserItemRepository<Menu>
 			return null;
 		}
 		return returnVal;
-	}
-
-	@Override
-	public boolean update(Menu object)
-	{
-		try
-		{
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
-			object.setUser(UserService.getCurrentUser());
-			object.enforceRelationships();
-			session.update(object);
-			session.flush();
-			session.getTransaction().commit();
-			session.close();
-		}
-		catch (Exception ex)
-		{
-			return false;
-		}
-
-		return true;
 	}
 
 	@Override

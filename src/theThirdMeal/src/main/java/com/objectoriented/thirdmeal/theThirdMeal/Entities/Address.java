@@ -46,4 +46,10 @@ public class Address extends UserItem
 
 	public String getZip() { return this.zip; }
 	public void setZip(String zip) { this.zip = zip; }
+
+	@Override
+	public String toString()
+	{
+		return String.format("%s, %s, %s, %s, %s", streetAddress, city, stateProvince, zip, country);
+	}
 }

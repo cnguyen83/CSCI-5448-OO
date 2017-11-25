@@ -32,4 +32,10 @@ public class PhoneNumber extends UserItem
 
 	public Integer getLastFourDigits() {	return this.lastFourDigits; }
 	public void setLastFourDigits(Integer lastFourDigits) { this.lastFourDigits = lastFourDigits; }
+
+	@Override
+	public String toString()
+	{
+		return String.format("(%s) %s-%s", areaCode, middleThreeDigits, lastFourDigits);
+	}
 }

@@ -18,14 +18,14 @@ public class UserRepository implements IRepository<User>, ISearchRepository<User
 	private SessionFactory sessionFactory;
 
 	@Override
-	public boolean create(User object)
+	public boolean save(User object)
 	{
 		try
 		{
 			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			object.enforceRelationships();
-			session.save(object);
+			session.saveOrUpdate(object);
 			session.flush();
 			session.getTransaction().commit();
 			session.close();
@@ -57,27 +57,6 @@ public class UserRepository implements IRepository<User>, ISearchRepository<User
 			return null;
 		}
 		return returnVal;
-	}
-
-	@Override
-	public boolean update(User object)
-	{
-		try
-		{
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
-			object.enforceRelationships();
-			session.update(object);
-			session.flush();
-			session.getTransaction().commit();
-			session.close();
-		}
-		catch (Exception ex)
-		{
-			return false;
-		}
-
-		return true;
 	}
 
 	@Override

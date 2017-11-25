@@ -5,7 +5,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Users")
-public class User extends UniqueItem
+public class User extends UniqueItem implements PersistableEntity
 {
 	@Column(name = "Username", nullable = false, unique = true)
 	protected String username;

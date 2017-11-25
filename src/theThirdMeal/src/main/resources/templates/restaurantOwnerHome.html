@@ -4,6 +4,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <h1 th:text="'Hello there, restaurant owner ' + ${username}" />
+    <h1 th:text="${restaurant.name}" />
+    <p th:text="'Address: ' + ${restaurant.address}" />
+    <p th:text="'Phone Number: ' + ${restaurant.phoneNumber}" />
 </body>
 </html>

@@ -1,12 +1,10 @@
 package com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract;
 
-public interface IRepository<T> {
+public interface IRepository<PersistableEntity> {
 
-	boolean create(T object);
+	boolean save(PersistableEntity object);
 
-	T read(Long entityKey);
+	PersistableEntity read(Long entityKey);
 
-	boolean update(T object);
-
-	boolean delete(T object);
+	boolean delete(PersistableEntity object);
 }

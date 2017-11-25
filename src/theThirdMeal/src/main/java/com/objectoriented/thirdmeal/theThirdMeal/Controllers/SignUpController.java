@@ -39,9 +39,15 @@ public class SignUpController
 			passwordEncoder.encode(user.getPassword()),
 			Arrays.asList(userRole));
 
-		if(userRepository.create(userToSave))
+		if(!userRepository.save(userToSave))
+			return "redirect:/error";
+			UserRolesEnum role = userToSave.getUserRoles().get(0).getRole();
+
+		if(role == UserRolesEnum.CUSTOMER)
 			return "redirect:/hello";
+		if(role == UserRolesEnum.RESTAURANT_OWNER)
+			return "redirect:/restaurantCreateEdit";
 		else
-			return "error";
+			return "redirect:/error";
 	}
 }

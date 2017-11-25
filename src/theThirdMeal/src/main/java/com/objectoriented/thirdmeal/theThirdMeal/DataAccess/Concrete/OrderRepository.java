@@ -19,7 +19,7 @@ public class OrderRepository implements IUserItemRepository<Order>
 	private SessionFactory sessionFactory;
 
 	@Override
-	public boolean create(Order object)
+	public boolean save(Order object)
 	{
 		try
 		{
@@ -27,7 +27,7 @@ public class OrderRepository implements IUserItemRepository<Order>
 			session.beginTransaction();
 			object.setUser(UserService.getCurrentUser());
 			object.enforceRelationships();
-			session.save(object);
+			session.saveOrUpdate(object);
 			session.flush();
 			session.getTransaction().commit();
 			session.close();
@@ -59,28 +59,6 @@ public class OrderRepository implements IUserItemRepository<Order>
 			return null;
 		}
 		return returnVal;
-	}
-
-	@Override
-	public boolean update(Order object)
-	{
-		try
-		{
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
-			object.setUser(UserService.getCurrentUser());
-			object.enforceRelationships();
-			session.update(object);
-			session.flush();
-			session.getTransaction().commit();
-			session.close();
-		}
-		catch (Exception ex)
-		{
-			return false;
-		}
-
-		return true;
 	}
 
 	@Override
