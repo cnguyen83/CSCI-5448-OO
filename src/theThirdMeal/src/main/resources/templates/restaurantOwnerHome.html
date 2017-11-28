@@ -15,7 +15,13 @@
         <h1 th:text="${restaurant.name}" />
         <h3 th:text="'Address: ' + ${restaurant.address}" />
         <h3 th:text="'Phone Number: ' + ${restaurant.phoneNumber}" />
-        <p><a href="/restaurantCreateEdit">Edit Restaurant</a></p>
+        <h3>Menus:</h3>
+        <div th:each="menu : ${restaurant.menus}">
+            <h4 th:text="${menu.name}" />
+        </div>
+        <h4><a href="/restaurantCreateEdit">Edit Restaurant</a></h4>
+        <h4><a th:href="@{/menuCreateEdit(restaurantKey=${restaurant.key})}">Add a Menu</a></h4>
+
     </div>
 </body>
 </html>
