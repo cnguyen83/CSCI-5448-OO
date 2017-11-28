@@ -44,7 +44,7 @@ public class SignUpController
 			UserRolesEnum role = userToSave.getUserRoles().get(0).getRole();
 
 		if(role == UserRolesEnum.CUSTOMER)
-			return "redirect:/hello";
+			return "redirect:/customerHome";
 		if(role == UserRolesEnum.RESTAURANT_OWNER)
 			return "redirect:/restaurantCreateEdit";
 		else

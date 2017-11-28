@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container" th:fragment="header">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout" class="btn btn-primary" />
+        </form>
+    </div>
+</body>
+</html>

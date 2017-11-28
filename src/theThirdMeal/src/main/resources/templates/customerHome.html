@@ -5,8 +5,31 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div th:replace="header :: header" />
     <div class="container">
-        <h1 th:text="'Hello there, customer ' + ${username}" />
+        <nav role="navigation">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">Home</li>
+            </ol>
+        </nav>
+        <h3>Orders:</h3>
+        <form th:action="@{/customerHome}" method="get">
+            <div class="form-row">
+                <h3 class="col-md-3">Restaurants:</h3>
+                <div class="form-group col-md-6">
+                    <input type="text" name="searchString" class="form-control"
+                           placeholder="Restaurant Name" />
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+        <div>
+            <h5 th:each="restaurant : ${restaurants}">
+                <a th:href="@{/restaurantView(restaurantKey=${restaurant.key})}" th:text="${restaurant.name}"/>
+            </h5>
+        </div>
     </div>
 </body>
 </html>

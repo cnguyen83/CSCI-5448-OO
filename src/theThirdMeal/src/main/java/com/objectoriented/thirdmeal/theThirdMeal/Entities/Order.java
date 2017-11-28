@@ -18,6 +18,10 @@ public class Order extends UserItem implements PersistableEntity
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems;
 
+	@ManyToOne
+	@JoinColumn(name = "RestaurantKey", nullable = false)
+	private Restaurant restaurant;
+
 	public Order(){}
 
 	public Order(Date createdTime, OrderStatus orderStatus, List<OrderItem> orderItems)
@@ -35,6 +39,9 @@ public class Order extends UserItem implements PersistableEntity
 
 	public List<OrderItem> getOrderItems() { return this.orderItems; }
 	public void setOrderItems(List<OrderItem> orderItems) { this.orderItems = orderItems; }
+
+	public Restaurant getRestaurant() { return restaurant; }
+	public void setRestaurant(Restaurant restaurant) { this.restaurant = restaurant; }
 
 	public void enforceRelationships()
 	{

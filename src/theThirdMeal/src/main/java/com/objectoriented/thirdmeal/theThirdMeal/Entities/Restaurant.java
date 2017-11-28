@@ -21,6 +21,9 @@ public class Restaurant extends UserItem implements PersistableEntity
 	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
 	private List<Menu> menus;
 
+	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+	private List<Order> orders;
+
 	@Column(name = "Name", nullable = false)
 	private String name;
 
@@ -54,6 +57,9 @@ public class Restaurant extends UserItem implements PersistableEntity
 
 	public List<Menu> getMenus() { return this.menus; }
 	public void setMenus(List<Menu> menus) { this.menus = menus; }
+
+	public List<Order> getOrders() { return orders; }
+	public void setOrders(List<Order> orders) { this.orders = orders; }
 
 	public void enforceRelationships()
 	{

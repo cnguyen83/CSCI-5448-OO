@@ -23,13 +23,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception
 	{
 		http.authorizeRequests()
-			.antMatchers("/signup", "/hello").permitAll()
-			.antMatchers("/", "/index").authenticated()
-			.antMatchers( "/customerHome").hasAuthority(UserRolesEnum.CUSTOMER.name())
-			.antMatchers("/restaurantOwnerHome", "/restaurantCreateEdit").hasAuthority(UserRolesEnum.RESTAURANT_OWNER.name())
+			.antMatchers("/signup", "/hello", "/error")
+				.permitAll()
+			.antMatchers("/", "/index")
+				.authenticated()
+			.antMatchers( "/customerHome", "/restaurantView")
+				.hasAuthority(UserRolesEnum.CUSTOMER.name())
+			.antMatchers("/restaurantOwnerHome", "/restaurantCreateEdit")
+				.hasAuthority(UserRolesEnum.RESTAURANT_OWNER.name())
 			.and()
 			.formLogin()
-			.loginPage("/login").permitAll();
+				.loginPage("/login").permitAll()
+			.and()
+			.logout()
+				.logoutSuccessUrl("/");
 	}
 
 	@Autowired

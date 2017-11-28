@@ -5,7 +5,13 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div th:replace="header :: header" />
     <div class="container">
+        <nav role="navigation">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">Home</li>
+            </ol>
+        </nav>
         <h1 th:text="${restaurant.name}" />
         <h3 th:text="'Address: ' + ${restaurant.address}" />
         <h3 th:text="'Phone Number: ' + ${restaurant.phoneNumber}" />

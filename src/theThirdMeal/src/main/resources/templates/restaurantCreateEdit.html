@@ -5,12 +5,16 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div th:replace="header :: header" />
     <div class="container">
+        <nav role="navigation" th:if="${restaurant.key != null}">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/restaurantOwnerHome">Home</a></li>
+                <li class="breadcrumb-item active">Edit Restaurant</li>
+            </ol>
+        </nav>
         <div class="row" th:if="${restaurant.key == null}">
             <h2>Create Restaurant</h2>
-        </div>
-        <div class="row" th:if="${restaurant.key != null}">
-            <h2>Edit Restaurant</h2>
         </div>
         <form action="#" th:action="@{/restaurantCreateEdit}" method="post">
             <input type="hidden" th:field="${restaurant.key}" id="key" />

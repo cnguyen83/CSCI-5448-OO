@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div th:replace="header :: header" />
+    <div th:if="${restaurant == null}" class="container">
+        <h1>Restaurant Not Found. <a href="/customerHome">Go Back</a>.</h1>
+
+    </div>
+    <div th:if="${restaurant != null}" class="container">
+        <nav role="navigation">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/customerHome">Home</a></li>
+                <li class="breadcrumb-item active" th:text="${restaurant.name}"/>
+            </ol>
+        </nav>
+        <h3 th:text="${restaurant.name}" />
+        <h4 th:text="'Address: ' + ${restaurant.address}" />
+        <h4 th:text="'Phone Number: ' + ${restaurant.phoneNumber}" />
+        <h4>Menus:</h4>
+    </div>
+</body>
+</html>
