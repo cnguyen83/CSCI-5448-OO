@@ -5,19 +5,39 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    <form action="#" th:action="@{/signup}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" th:field="${user.username}" id="username" />
-        <label for="password">Password:</label>
-        <input type="password" th:field="${user.password}" id="password" />
-        <label for="userRole">User Type:</label>
-        <select th:field="${userRole.role}" id="userRole" >
-            <option th:each="role : ${T(com.objectoriented.thirdmeal.theThirdMeal.Entities.UserRolesEnum).values()}"
-                th:value="${role}"
-                th:text="${role.display()}">
-            </option>
-        </select>
-        <input type="submit" value="Submit"/>
-    </form>
+    <div class="container">
+        <div class="row">
+            <h2>Sign Up for The Third Meal</h2>
+        </div>
+        <form action="#" th:action="@{/signup}" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="username">Username:</label>
+                    <input type="text" th:field="${user.username}" id="username" class="form-control"
+                           required="true" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="password">Password:</label>
+                    <input type="password" th:field="${user.password}" id="password" class="form-control"
+                           required="true" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="userRole">User Type:</label>
+                    <select th:field="${userRole.role}" id="userRole" class="form-control"
+                            required="true" >
+                        <option th:each="role : ${T(com.objectoriented.thirdmeal.theThirdMeal.Entities.UserRolesEnum).values()}"
+                            th:value="${role}"
+                            th:text="${role.display()}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </body>
 </html>

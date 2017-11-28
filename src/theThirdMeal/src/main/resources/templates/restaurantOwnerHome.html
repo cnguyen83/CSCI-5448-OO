@@ -5,8 +5,11 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    <h1 th:text="${restaurant.name}" />
-    <p th:text="'Address: ' + ${restaurant.address}" />
-    <p th:text="'Phone Number: ' + ${restaurant.phoneNumber}" />
+    <div class="container">
+        <h1 th:text="${restaurant.name}" />
+        <h3 th:text="'Address: ' + ${restaurant.address}" />
+        <h3 th:text="'Phone Number: ' + ${restaurant.phoneNumber}" />
+        <p><a href="/restaurantCreateEdit">Edit Restaurant</a></p>
+    </div>
 </body>
 </html>
