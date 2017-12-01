@@ -1,6 +1,9 @@
 package com.objectoriented.thirdmeal.theThirdMeal.Entities;
 
 import javax.persistence.*;
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -31,6 +34,7 @@ public class Restaurant extends UserItem implements PersistableEntity
 	{
 		address = new Address();
 		phoneNumber = new PhoneNumber();
+		initializeDailyHours();
 	}
 
 	public Restaurant(String name, Address address, PhoneNumber phoneNumber,
@@ -52,14 +56,22 @@ public class Restaurant extends UserItem implements PersistableEntity
 	public String getName() { return this.name; }
 	public void setName(String name) { this.name = name; }
 
-	public List<RestaurantDailyHours> getDailyHours() { return this.dailyHours; }
-	public void setDailyHours(List<RestaurantDailyHours> dailyHours) { this.dailyHours = dailyHours; }
+	public List<RestaurantDailyHours> getDailyHours()
+	{
+		Collections.sort(this.dailyHours);
+		return this.dailyHours;
+	}
 
 	public List<Menu> getMenus() { return this.menus; }
 	public void setMenus(List<Menu> menus) { this.menus = menus; }
 
 	public List<Order> getOrders() { return orders; }
 	public void setOrders(List<Order> orders) { this.orders = orders; }
+
+	public RestaurantDailyHours hoursForToday()
+	{
+		return null;
+	}
 
 	public void enforceRelationships()
 	{
@@ -95,5 +107,14 @@ public class Restaurant extends UserItem implements PersistableEntity
 
 		if(this.menus != null)
 			this.menus.size();
+	}
+
+	public void initializeDailyHours()
+	{
+		dailyHours = new ArrayList<>();
+		for(DayOfWeek dayOfWeek : DayOfWeek.values())
+		{
+			dailyHours.add(new RestaurantDailyHours(dayOfWeek, null, null));
+		}
 	}
 }

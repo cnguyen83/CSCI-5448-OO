@@ -5,17 +5,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "Menus")
-public class Menu extends UserItem implements PersistableEntity
+public class Menu extends RestaurantItem implements PersistableEntity
 {
 	@Column(name = "Name", nullable = false)
 	private String name;
 
 	@OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
 	private List<MenuItem> menuItems;
-
-	@ManyToOne
-	@JoinColumn(name = "RestaurantKey", nullable = false)
-	private Restaurant restaurant;
 
 	public Menu(){}
 
@@ -30,9 +26,6 @@ public class Menu extends UserItem implements PersistableEntity
 
 	public List<MenuItem> getMenuItems() { return this.menuItems; }
 	public void setMenuItems(List<MenuItem> menuItems) { this.menuItems = menuItems; }
-
-	public Restaurant getRestaurant() { return this.restaurant; }
-	public void setRestaurant(Restaurant restaurant) { this.restaurant = restaurant; }
 
 	public void enforceRelationships()
 	{

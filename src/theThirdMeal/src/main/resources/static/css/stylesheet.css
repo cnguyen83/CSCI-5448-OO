@@ -1,0 +1,5 @@
+.restaurantPanel, .orderPanel {
+  border: thin solid black;
+  padding: 15px;
+  margin: 15px;
+}

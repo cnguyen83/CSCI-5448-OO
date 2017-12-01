@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/stylesheet.css" rel="stylesheet" />
+</head>
+<body>
+<div th:replace="header :: header" />
+<div class="container">
+    <nav role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/restaurantView(restaurantKey=${restaurantKey})}">Home</a></li>
+            <li class="breadcrumb-item active">Create Order</li>
+        </ol>
+    </nav>
+    <form action="#" th:action="@{/orderCreate}" method="post">
+        <input type="hidden" th:field="${order.key}" id="key" />
+        <input type="hidden" th:field="${order.restaurant.key}" id="restaurantKey" />
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -2,8 +2,8 @@ package com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Concrete;
 
 import com.objectoriented.thirdmeal.theThirdMeal.Authentication.UserService;
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IRepository;
+import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IRestaurantItemRepository;
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IUserItemRepository;
-import com.objectoriented.thirdmeal.theThirdMeal.Entities.Menu;
 import com.objectoriented.thirdmeal.theThirdMeal.Entities.Order;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +13,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class OrderRepository implements IUserItemRepository<Order>
+public class OrderRepository implements IRepository<Order>,
+	IUserItemRepository<Order>, IRestaurantItemRepository<Order>
 {
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -84,7 +85,48 @@ public class OrderRepository implements IUserItemRepository<Order>
 	}
 
 	@Override
-	public List<Order> readAllForCurrentUser() {
-		return null;
+	public List<Order> readAllForCurrentUser()
+	{
+		List<Order> returnVal;
+		Session session = sessionFactory.openSession();
+		returnVal = session.createQuery("from Order where user.key=?")
+			.setParameter(0, UserService.getCurrentUser().getKey())
+			.list();
+
+		if(returnVal != null)
+		{
+			for(Order order : returnVal)
+			{
+				if(order != null)
+					order.loadProperties();
+			}
+		}
+
+		session.close();
+
+		return returnVal;
+	}
+
+	@Override
+	public List<Order> readAllForRestaurant(Long restaurantKey)
+	{
+		List<Order> returnVal;
+		Session session = sessionFactory.openSession();
+		returnVal = session.createQuery("from Order where restaurant.key=?")
+			.setParameter(0, restaurantKey)
+			.list();
+
+		if(returnVal != null)
+		{
+			for(Order order : returnVal)
+			{
+				if(order != null)
+					order.loadProperties();
+			}
+		}
+
+		session.close();
+
+		return returnVal;
 	}
 }

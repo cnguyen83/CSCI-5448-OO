@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/stylesheet.css" rel="stylesheet" />
 </head>
 <body>
     <div th:replace="header :: header" />
@@ -12,23 +13,56 @@
                 <li class="breadcrumb-item active">Home</li>
             </ol>
         </nav>
-        <h3>Orders:</h3>
-        <form th:action="@{/customerHome}" method="get">
-            <div class="form-row">
-                <h3 class="col-md-3">Restaurants:</h3>
-                <div class="form-group col-md-6">
-                    <input type="text" name="searchString" class="form-control"
-                           placeholder="Restaurant Name" />
+        <div id="orderDiv">
+            <h3>Orders:</h3>
+            <div th:each="order : ${orders}" class="orderPanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 th:text="${order.restaurant.name}"/>
+                    </div>
+                    <div class="col-md-6">
+                        <p th:text="${order.createdTime}"/>
+                    </div>
                 </div>
-                <div class="form-group col-md-2">
-                    <input type="submit" value="Search" class="btn btn-primary" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <p th:text="'$' + ${order.getCost()}"/>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Status: <em th:text="${order.orderStatus.display()}"/></p>
+                    </div>
                 </div>
             </div>
-        </form>
-        <div>
-            <h5 th:each="restaurant : ${restaurants}">
-                <a th:href="@{/restaurantView(restaurantKey=${restaurant.key})}" th:text="${restaurant.name}"/>
-            </h5>
+        </div>
+        <div id="restaurantDiv">
+            <form th:action="@{/customerHome}" method="get">
+                <div class="form-row">
+                    <h3 class="col-md-3">Restaurants:</h3>
+                    <div class="form-group col-md-6">
+                        <input type="text" name="searchString" class="form-control"
+                               placeholder="Restaurant Name" />
+                    </div>
+                    <div class="form-group col-md-2">
+                        <input type="submit" value="Search" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+            <div th:each="restaurant : ${restaurants}" class="restaurantPanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><a th:href="@{/restaurantView(restaurantKey=${restaurant.key})}" th:text="${restaurant.name}"/></h5>
+                    </div>
+                    <div class="col-md-6">
+                        <p th:text="${restaurant.address}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <p th:text="${restaurant.phoneNumber}"/>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

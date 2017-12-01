@@ -2,8 +2,10 @@ package com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Concrete;
 
 import com.objectoriented.thirdmeal.theThirdMeal.Authentication.UserService;
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IRepository;
+import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IRestaurantItemRepository;
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IUserItemRepository;
 import com.objectoriented.thirdmeal.theThirdMeal.Entities.Menu;
+import com.objectoriented.thirdmeal.theThirdMeal.Entities.Order;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class MenuRepository implements IUserItemRepository<Menu>
+public class MenuRepository implements IRepository<Menu>, IRestaurantItemRepository<Menu>
 {
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -83,7 +85,26 @@ public class MenuRepository implements IUserItemRepository<Menu>
 	}
 
 	@Override
-	public List<Menu> readAllForCurrentUser() {
-		return null;
+	public List<Menu> readAllForRestaurant(Long restaurantKey)
+	{
+
+		List<Menu> returnVal;
+		Session session = sessionFactory.openSession();
+		returnVal = session.createQuery("from Menu where restaurant.key=?")
+			.setParameter(0, restaurantKey)
+			.list();
+
+		if(returnVal != null)
+		{
+			for(Menu menu : returnVal)
+			{
+				if(menu != null)
+					menu.loadProperties();
+			}
+		}
+
+		session.close();
+
+		return returnVal;
 	}
 }

@@ -15,7 +15,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class RestaurantRepository implements IUserItemRepository<Restaurant>, ISearchRepository<Restaurant>
+public class RestaurantRepository implements IRepository<Restaurant>,
+	IUserItemRepository<Restaurant>, ISearchRepository<Restaurant>
 {
 	@Autowired
 	private SessionFactory sessionFactory;

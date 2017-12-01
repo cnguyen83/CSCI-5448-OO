@@ -4,7 +4,7 @@ import com.objectoriented.thirdmeal.theThirdMeal.Entities.UserItem;
 
 import java.util.List;
 
-public interface IUserItemRepository<T extends UserItem> extends IRepository<T>
+public interface IUserItemRepository<T extends UserItem>
 {
 	List<T> readAllForCurrentUser();
 }

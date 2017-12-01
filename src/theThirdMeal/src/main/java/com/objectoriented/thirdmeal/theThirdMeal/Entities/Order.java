@@ -5,7 +5,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "Orders")
-public class Order extends UserItem implements PersistableEntity
+public class Order extends RestaurantItem implements PersistableEntity
 {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CreatedTime", nullable = false)
@@ -17,10 +17,6 @@ public class Order extends UserItem implements PersistableEntity
 
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems;
-
-	@ManyToOne
-	@JoinColumn(name = "RestaurantKey", nullable = false)
-	private Restaurant restaurant;
 
 	public Order(){}
 
@@ -40,8 +36,10 @@ public class Order extends UserItem implements PersistableEntity
 	public List<OrderItem> getOrderItems() { return this.orderItems; }
 	public void setOrderItems(List<OrderItem> orderItems) { this.orderItems = orderItems; }
 
-	public Restaurant getRestaurant() { return restaurant; }
-	public void setRestaurant(Restaurant restaurant) { this.restaurant = restaurant; }
+	public Double getCost()
+	{
+		return 5.0;
+	}
 
 	public void enforceRelationships()
 	{

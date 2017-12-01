@@ -3,24 +3,67 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/stylesheet.css" rel="stylesheet" />
 </head>
 <body>
-    <div th:replace="header :: header" />
     <div class="container">
         <nav role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active">Home</li>
             </ol>
         </nav>
-        <h1 th:text="${restaurant.name}" />
-        <h3 th:text="'Address: ' + ${restaurant.address}" />
-        <h3 th:text="'Phone Number: ' + ${restaurant.phoneNumber}" />
-        <h3>Menus:</h3>
-        <div th:each="menu : ${restaurant.menus}">
-            <h4 th:text="${menu.name}" />
+        <div class="row">
+            <div class="col-md-8">
+                <h1 th:text="${restaurant.name}" />
+            </div>
+            <div class="col-md-4">
+                <h3><a href="/restaurantCreateEdit">Edit Restaurant</a></h3>
+            </div>
         </div>
-        <h4><a href="/restaurantCreateEdit">Edit Restaurant</a></h4>
-        <h4><a th:href="@{/menuCreateEdit(restaurantKey=${restaurant.key})}">Add a Menu</a></h4>
+
+        <div id="orderDiv">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Orders:</h3>
+                </div>
+            </div>
+            <div th:each="order : ${orders}" class="orderPanel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 th:text="${order.restaurant.name}"/>
+                    </div>
+                    <div class="col-md-6">
+                        <p th:text="${order.createdTime}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p th:text="'$' + ${order.getCost()}"/>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Status: <em th:text="${order.orderStatus.display()}"/></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Menus:</h3>
+            </div>
+            <div class="col-md-4">
+                <h4><a th:href="@{/menuCreateEdit(restaurantKey=${restaurant.key})}">Add</a></h4>
+            </div>
+        </div>
+        <div class="row" th:each="menu : ${restaurant.menus}">
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
+                <h4 th:text="${menu.name}" />
+            </div>
+            <div class="col-md-4">
+                <h4><a th:href="@{/menuCreateEdit(restaurantKey=${restaurant.key}, menuKey=${menu.key})}">Edit</a></h4>
+            </div>
+        </div>
 
     </div>
 </body>
