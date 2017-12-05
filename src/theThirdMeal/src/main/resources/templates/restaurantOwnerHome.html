@@ -6,18 +6,19 @@
     <link href="/css/stylesheet.css" rel="stylesheet" />
 </head>
 <body>
+    <nav role="navigation" class="navbar navbar-expand-md navbar-light bg-light">
+        <ol class="breadcrumb my-2">
+            <li class="breadcrumb-item active">Home</li>
+        </ol>
+        <div th:replace="header :: logout" />
+    </nav>
     <div class="container">
-        <nav role="navigation">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item active">Home</li>
-            </ol>
-        </nav>
         <div class="row">
             <div class="col-md-8">
                 <h1 th:text="${restaurant.name}" />
             </div>
             <div class="col-md-4">
-                <h3><a href="/restaurantCreateEdit">Edit Restaurant</a></h3>
+                <h3><a href="/restaurantCreateEdit" class="btn btn-primary">Edit Restaurant</a></h3>
             </div>
         </div>
 
@@ -52,7 +53,10 @@
                 <h3>Menus:</h3>
             </div>
             <div class="col-md-4">
-                <h4><a th:href="@{/menuCreateEdit(restaurantKey=${restaurant.key})}">Add</a></h4>
+                <h4>
+                    <a th:href="@{/menuCreateEdit(restaurantKey=${restaurant.key})}"
+                       class="btn btn-primary">Add</a>
+                </h4>
             </div>
         </div>
         <div class="row" th:each="menu : ${restaurant.menus}">
@@ -61,7 +65,10 @@
                 <h4 th:text="${menu.name}" />
             </div>
             <div class="col-md-4">
-                <h4><a th:href="@{/menuCreateEdit(restaurantKey=${restaurant.key}, menuKey=${menu.key})}">Edit</a></h4>
+                <h4>
+                    <a th:href="@{/menuCreateEdit(restaurantKey=${restaurant.key}, menuKey=${menu.key})}"
+                       class="btn btn-primary">Edit</a>
+                </h4>
             </div>
         </div>
 

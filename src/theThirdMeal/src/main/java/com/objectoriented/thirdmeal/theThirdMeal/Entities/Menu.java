@@ -1,6 +1,7 @@
 package com.objectoriented.thirdmeal.theThirdMeal.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,10 @@ public class Menu extends RestaurantItem implements PersistableEntity
 	@OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
 	private List<MenuItem> menuItems;
 
-	public Menu(){}
+	public Menu()
+	{
+		this.menuItems = new ArrayList<>();
+	}
 
 	public Menu(String name, List<MenuItem> menuItems)
 	{

@@ -18,13 +18,17 @@ public class Order extends RestaurantItem implements PersistableEntity
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems;
 
+	@Column(name = "Cost", nullable = false)
+	private Double cost;
+
 	public Order(){}
 
-	public Order(Date createdTime, OrderStatus orderStatus, List<OrderItem> orderItems)
+	public Order(Date createdTime, OrderStatus orderStatus, List<OrderItem> orderItems, Double cost)
 	{
 		this.createdTime = createdTime;
 		this.orderStatus = orderStatus;
 		this.orderItems = orderItems;
+		this.cost = cost;
 	}
 
 	public Date getCreatedTime() { return this.createdTime; }
@@ -36,10 +40,8 @@ public class Order extends RestaurantItem implements PersistableEntity
 	public List<OrderItem> getOrderItems() { return this.orderItems; }
 	public void setOrderItems(List<OrderItem> orderItems) { this.orderItems = orderItems; }
 
-	public Double getCost()
-	{
-		return 5.0;
-	}
+	public Double getCost() { return this.cost; }
+	public void setCost(Double cost) { this.cost = cost; }
 
 	public void enforceRelationships()
 	{
@@ -57,5 +59,22 @@ public class Order extends RestaurantItem implements PersistableEntity
 	{
 		if(this.orderItems != null)
 			this.orderItems.size();
+	}
+
+	public Double calculateCost()
+	{
+		Double cost = 0.0;
+
+		for(OrderItem item : orderItems)
+		{
+			cost += item.calculateCost();
+		}
+
+		return cost;
+	}
+
+	public void removeEmptyOrderItems()
+	{
+		orderItems.removeIf(item -> item.getQuantity() == 0);
 	}
 }

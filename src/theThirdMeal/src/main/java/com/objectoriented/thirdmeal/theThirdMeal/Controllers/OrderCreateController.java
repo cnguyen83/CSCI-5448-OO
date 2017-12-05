@@ -1,10 +1,7 @@
 package com.objectoriented.thirdmeal.theThirdMeal.Controllers;
 
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IRepository;
-import com.objectoriented.thirdmeal.theThirdMeal.Entities.Menu;
-import com.objectoriented.thirdmeal.theThirdMeal.Entities.Order;
-import com.objectoriented.thirdmeal.theThirdMeal.Entities.OrderStatus;
-import com.objectoriented.thirdmeal.theThirdMeal.Entities.Restaurant;
+import com.objectoriented.thirdmeal.theThirdMeal.Entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Controller
@@ -29,10 +27,24 @@ public class OrderCreateController
 	{
 		Restaurant restaurant = restaurantRepository.read(restaurantKey);
 
+		if(restaurant == null)
+			return "redirect:/error";
+
 		Order order = new Order();
+
+		ArrayList<OrderItem> orderItems = new ArrayList<>();
+
+		for(Menu menu : restaurant.getMenus())
+		{
+			for(MenuItem menuItem : menu.getMenuItems())
+			{
+				orderItems.add(new OrderItem(0, menuItem, order));
+			}
+		}
+
+		order.setOrderItems(orderItems);
 		order.setRestaurant(restaurant);
 
-		model.addAttribute("restaurantKey", restaurant.getKey());
 		model.addAttribute("order", order);
 
 		return "orderCreate";
@@ -44,10 +56,12 @@ public class OrderCreateController
 		order.setCreatedTime(new Date());
 		order.setOrderStatus(OrderStatus.Open);
 
+		order.removeEmptyOrderItems();
+
+		order.setCost(order.calculateCost());
+
 		if(!orderRepository.save(order))
-		{
-			return "/error";
-		}
+			return "redirect:/error";
 
 		return "redirect:/customerHome";
 	}

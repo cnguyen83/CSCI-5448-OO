@@ -6,13 +6,13 @@
     <link href="/css/stylesheet.css" rel="stylesheet" />
 </head>
 <body>
-    <div th:replace="header :: header" />
     <div class="container">
-        <nav role="navigation" th:if="${restaurant.key != null}">
-            <ol class="breadcrumb">
+        <nav role="navigation" th:if="${restaurant.key != null}" class="navbar navbar-expand-md navbar-light bg-light">
+            <ol class="breadcrumb my-2">
                 <li class="breadcrumb-item"><a href="/restaurantOwnerHome">Home</a></li>
                 <li class="breadcrumb-item active">Edit Restaurant</li>
             </ol>
+            <div th:replace="header :: logout" />
         </nav>
         <div class="row" th:if="${restaurant.key == null}">
             <h2>Create Restaurant</h2>
@@ -94,7 +94,10 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group">
+                <div class="col-md-1">
+                    <a href="/restaurantOwnerHome" class="btn btn-danger">Cancel</a>
+                </div>
+                <div class="col-md-1 form-group">
                     <input type="submit" value="Submit" class="btn btn-primary"/>
                 </div>
             </div>

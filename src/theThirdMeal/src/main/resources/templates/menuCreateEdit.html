@@ -6,14 +6,14 @@
     <link href="/css/stylesheet.css" rel="stylesheet" />
 </head>
 <body>
-    <div th:replace="header :: header" />
     <div class="container">
-        <nav role="navigation">
-            <ol class="breadcrumb">
+        <nav role="navigation" class="navbar navbar-expand-md navbar-light bg-light">
+            <ol class="breadcrumb my-2">
                 <li class="breadcrumb-item"><a href="/restaurantOwnerHome">Home</a></li>
                 <li class="breadcrumb-item active"
                     th:text="${menu.key == null ? 'Create' : 'Edit'} + ' Menu'" />
             </ol>
+            <div th:replace="header :: logout" />
         </nav>
         <form action="#" th:action="@{/menuCreateEdit}" method="post">
             <input type="hidden" th:field="${menu.key}" id="key" />
@@ -23,10 +23,47 @@
                 <input type="text" th:field="${menu.name}" id="name"
                        class="form-control" required="true" />
             </div>
-            <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-primary"/>
+            <div class="menuItemsSection">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h4>Menu Items:</h4>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-secondary" id="addItemButton">Add another item</button>
+                    </div>
+                </div>
+                <div id="menuItemsInput">
+                    <div  th:each="menuItem, stat : ${menu.menuItems}">
+                        <input type="hidden" th:field="${menu.menuItems[__${stat.index}__].key}" />
+                        <div class="form-group">
+                            <label>Item Name</label>
+                            <input type="text" class="form-control"
+                                   th:field="${menu.menuItems[__${stat.index}__].name}" />
+                        </div>
+                        <div class="form-group">
+                            <label>Item Description</label>
+                            <input type="text" class="form-control"
+                                   th:field="${menu.menuItems[__${stat.index}__].description}" />
+                        </div>
+                        <div class="form-group">
+                            <label>Item Cost</label>
+                            <input type="text" class="form-control"
+                                   th:field="${menu.menuItems[__${stat.index}__].cost}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-1">
+                    <a href="/restaurantOwnerHome" class="btn btn-danger">Cancel</a>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Submit" class="btn btn-primary"/>
+                </div>
             </div>
         </form>
     </div>
+    <script src="/js/jquery-3.2.1.min.js" />
+    <script src="/js/menuItemAdd.js" />
 </body>
 </html>

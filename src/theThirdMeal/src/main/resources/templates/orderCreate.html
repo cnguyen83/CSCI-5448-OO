@@ -6,19 +6,52 @@
     <link href="/css/stylesheet.css" rel="stylesheet" />
 </head>
 <body>
-<div th:replace="header :: header" />
 <div class="container">
-    <nav role="navigation">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/restaurantView(restaurantKey=${restaurantKey})}">Home</a></li>
+    <nav role="navigation" class="navbar navbar-expand-md navbar-light bg-light">
+        <ol class="breadcrumb my-2">
+            <li class="breadcrumb-item"><a href="/customerHome">Home</a></li>
+            <li class="breadcrumb-item">
+                <a th:href="@{/restaurantView(restaurantKey=${order.restaurant.key})}"
+                   th:text="${order.restaurant.name}" />
+            </li>
             <li class="breadcrumb-item active">Create Order</li>
         </ol>
+        <div th:replace="header :: logout" />
     </nav>
     <form action="#" th:action="@{/orderCreate}" method="post">
         <input type="hidden" th:field="${order.key}" id="key" />
         <input type="hidden" th:field="${order.restaurant.key}" id="restaurantKey" />
-        <div class="form-group">
-            <input type="submit" value="Submit" class="btn btn-primary"/>
+        <div  th:each="orderItem, stat : ${order.orderItems}">
+            <input type="hidden" th:field="${order.orderItems[__${stat.index}__].order.key}" />
+            <input type="hidden" th:field="${order.orderItems[__${stat.index}__].menuItem.key}" />
+            <input type="hidden" th:field="${order.orderItems[__${stat.index}__].menuItem.cost}" />
+            <div class="form-row">
+                <div class="form-group col-md-1">
+                    <input type="text" class="form-control"
+                           th:field="${order.orderItems[__${stat.index}__].quantity}" />
+                </div>
+                <div class="col-md-3">
+                    <h5 th:text="${orderItem.menuItem.name}" />
+                </div>
+                <div class="col-md-3">
+                    <h5 th:text="${orderItem.menuItem.cost}" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    <p th:text="${orderItem.menuItem.description}" />
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-1">
+                <a th:href="@{/restaurantView(restaurantKey=${order.restaurant.key})}"
+                   class="btn btn-danger">Cancel</a>
+            </div>
+            <div class="col-md-1 form-group">
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+            </div>
         </div>
     </form>
 </div>

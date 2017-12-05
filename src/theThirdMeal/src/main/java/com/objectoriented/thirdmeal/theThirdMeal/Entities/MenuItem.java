@@ -16,7 +16,7 @@ public class MenuItem extends UserItem
 	private Double cost;
 
 	@Enumerated(EnumType.ORDINAL)
-	@Column(name = "Type", nullable = false)
+	@Column(name = "Type")
 	private MenuItemType type;
 
 	@ManyToOne

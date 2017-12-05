@@ -6,8 +6,8 @@
     <link href="/css/stylesheet.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container" th:fragment="header">
-        <form th:action="@{/logout}" method="post">
+    <div th:fragment="logout" class="ml-auto my-2">
+        <form th:action="@{/logout}" method="post" class="form-inline">
             <input type="submit" value="Logout" class="btn btn-primary" />
         </form>
     </div>

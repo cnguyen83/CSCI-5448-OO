@@ -6,12 +6,12 @@
     <link href="/css/stylesheet.css" rel="stylesheet" />
 </head>
 <body>
-    <div th:replace="header :: header" />
     <div class="container">
-        <nav role="navigation">
-            <ol class="breadcrumb">
+        <nav role="navigation" class="navbar navbar-expand-md navbar-light bg-light">
+            <ol class="breadcrumb my-2">
                 <li class="breadcrumb-item active">Home</li>
             </ol>
+            <div th:replace="header :: logout" />
         </nav>
         <div id="orderDiv">
             <h3>Orders:</h3>

@@ -105,8 +105,23 @@ public class Restaurant extends UserItem implements PersistableEntity
 		if(this.dailyHours != null)
 			this.dailyHours.size();
 
+		if(this.orders != null)
+		{
+			this.orders.size();
+			for(Order order : orders)
+			{
+				order.loadProperties();
+			}
+		}
+
 		if(this.menus != null)
+		{
 			this.menus.size();
+			for(Menu menu : menus)
+			{
+				menu.loadProperties();
+			}
+		}
 	}
 
 	public void initializeDailyHours()
