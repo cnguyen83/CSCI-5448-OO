@@ -28,7 +28,7 @@
                     <h3>Orders:</h3>
                 </div>
             </div>
-            <div th:each="order : ${orders}" class="orderPanel">
+            <div th:each="order : ${restaurant.orders}" class="orderPanel">
                 <div class="row">
                     <div class="col-md-6">
                         <h5 th:text="${order.restaurant.name}"/>
@@ -42,7 +42,18 @@
                         <p th:text="'$' + ${order.getCost()}"/>
                     </div>
                     <div class="col-md-6">
-                        <p>Status: <em th:text="${order.orderStatus.display()}"/></p>
+                        <form th:action="@{/restaurantOwnerHome}" method="post" class="form-inline">
+                            <input type="hidden" name="orderKey" th:value="${order.key}" />
+                            <p>Status: </p>
+                            <select name="orderStatus" class="form-control" required="true" >
+                                <option th:each="status : ${T(com.objectoriented.thirdmeal.theThirdMeal.Entities.OrderStatus).values()}"
+                                        th:value="${status}"
+                                        th:text="${status.display()}"
+                                        th:selected="${order.orderStatus == status}">
+                                </option>
+                            </select>
+                            <input type="submit" value="Update" class="btn btn-primary"/>
+                        </form>
                     </div>
                 </div>
             </div>

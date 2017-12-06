@@ -1,5 +1,6 @@
 package com.objectoriented.thirdmeal.theThirdMeal.Controllers;
 
+import com.objectoriented.thirdmeal.theThirdMeal.Authentication.UserService;
 import com.objectoriented.thirdmeal.theThirdMeal.DataAccess.Abstract.IRepository;
 import com.objectoriented.thirdmeal.theThirdMeal.Entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,9 @@ public class OrderCreateController
 	{
 		order.setCreatedTime(new Date());
 		order.setOrderStatus(OrderStatus.Open);
+
+		// set to the current user before saving
+		order.setUser(UserService.getCurrentUser());
 
 		order.removeEmptyOrderItems();
 

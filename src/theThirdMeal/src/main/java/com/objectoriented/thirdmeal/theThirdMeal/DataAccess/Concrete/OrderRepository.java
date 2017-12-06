@@ -26,7 +26,6 @@ public class OrderRepository implements IRepository<Order>,
 		{
 			Session session = sessionFactory.openSession();
 			session.beginTransaction();
-			object.setUser(UserService.getCurrentUser());
 			object.enforceRelationships();
 			session.saveOrUpdate(object);
 			session.flush();
@@ -69,7 +68,6 @@ public class OrderRepository implements IRepository<Order>,
 		{
 			Session session = sessionFactory.openSession();
 			session.beginTransaction();
-			object.setUser(UserService.getCurrentUser());
 			object.enforceRelationships();
 			session.delete(object);
 			session.flush();

@@ -24,9 +24,6 @@ public class RestaurantOwnerHomeController
 	IUserItemRepository<Restaurant> userRestaurantRepository;
 
 	@Autowired
-	IRestaurantItemRepository<Order> restaurantOrderRepository;
-
-	@Autowired
 	IRepository<Order> orderRepository;
 
 	@GetMapping("/restaurantOwnerHome")
@@ -39,19 +36,14 @@ public class RestaurantOwnerHomeController
 
 		Restaurant restaurant = restaurants.get(0);
 
-		List<Order> orders = restaurantOrderRepository.readAllForRestaurant(restaurant.getKey());
-		if(orders == null)
-			orders = new ArrayList<>();
-
-
-		model.addAttribute("username", UserService.getCurrentUser().getUsername());
 		model.addAttribute("restaurant", restaurant);
-		model.addAttribute("orders", orders);
+		model.addAttribute("orderKey", new Long(0L));
+		model.addAttribute("orderStatus", OrderStatus.Completed);
 		return "restaurantOwnerHome";
 	}
 
 	@PostMapping("/restaurantOwnerHome")
-	public String restaurantOwnerHomePost(@ModelAttribute Long orderKey, @ModelAttribute OrderStatus orderStatus)
+	public String restaurantOwnerHomePost(Long orderKey, OrderStatus orderStatus)
 	{
 		Order order = orderRepository.read(orderKey);
 
