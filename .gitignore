@@ -1,5 +1,6 @@
 src/theThirdMeal/target/
 !src/theThirdMeal/.mvn/wrapper/maven-wrapper.jar
+src/.idea
 
 ### STS ###
 src/theThirdMeal/.apt_generated
