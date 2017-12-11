@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="dm.config" name="dm Configuration for 'main'">
-    <output-path>$PROJECT_DIR$/out/artifacts/dm_Configuration_for__main_</output-path>
-    <root id="root">
-      <element id="packaging-for-dm-config" module="main" />
-    </root>
-  </artifact>
-</component>
