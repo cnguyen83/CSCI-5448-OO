@@ -35,7 +35,11 @@ Between Part 2 and the final class digram, xyz changed.
 
 ## Design Patterns in Prototype
 
-We used xyz design patterns in our final prototype.
+We used two prominent design patterns in our final prototype.
+
+* Strategy Design Pattern: We have used this design pattern extensively in the project. We have numerous data item repositories that are represented as interfaces, which are given concrete implementations. With such a setup we have an abstract layer of interfaces which can be swapped out for alternate functionalities without any change to their concrete implementations.
+
+* Dependency Injecction: In our final system we have used Dependency Injection in our front-end pages. We have introduced the IRepositoryProvider, which is responsible for providing the repositories to the page. This is the only strict dependency taken by each page. This helps to decouple the pages from the repositories they require by putting an intermediate object in between the two. Any number of repositories can be consumed by each page, and the page's constructors will not need to be modified to consume a new repository. Furthermore, this allows the possibility for lazy repository creation, where it is only generated when it is needed.
 
 ## What We Learned
 
