@@ -25,6 +25,7 @@ The Third Meal
 ## Features Not Implemented
 
 | ID | Requirement | Topic Area | Actor | Priority |
+| --- | --- | --- | --- | --- |
 | UR004 | Users should be able to cancel an active order | ORders |Customer | Medium |
 | UR006 | Users should be able to edit their profiles | Profile | Customer / Restaurant owner | High |
 
