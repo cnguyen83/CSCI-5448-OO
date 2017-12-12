@@ -31,7 +31,12 @@ The Third Meal
 
 For the diagrams, please refer to Appendix A.
 
-Between Part 2 and the final class digram, xyz changed.
+There a few major differences between our class diagrams for part 2 and part 3. Because of the sheer size and ordering of the original class diagram, it is very hard to comprehend the relation between the objects. In the final class diagrams we have arranged it based on the functionality. This made our class diagram more understandable and clean. 
+
+In the final class diagram we have also made use of multiple design patterns, most importantly Dependency Injection and Strategy design patterns(discussed in more detail below). It reduced the coupling between our classes which meant less lines in the class diagram, reduced the complexity of the project and increased the ease of development. 
+
+Since most of the design of the project was performed before the actual development, there were very less decisions to make as we were writing the code. Class diagram helped in understanding all the different moving parts of the project which greatly reduced the time and effort required during the coding of the project. 
+
 
 ## Design Patterns in Prototype
 
@@ -41,7 +46,7 @@ We used two prominent design patterns in our final prototype.
 
 <img src="strategy.png" alt="" title="Strategy Design Pattern" />
 
-* Dependency Injecction: In our final system we have used Dependency Injection in our front-end pages. We have introduced the IRepositoryProvider, which is responsible for providing the repositories to the page. This is the only strict dependency taken by each page. This helps to decouple the pages from the repositories they require by putting an intermediate object in between the two. Any number of repositories can be consumed by each page, and the page's constructors will not need to be modified to consume a new repository. Furthermore, this allows the possibility for lazy repository creation, where it is only generated when it is needed.
+* Dependency Injection: In our final system we have used Dependency Injection in our front-end pages. We have introduced the IRepositoryProvider, which is responsible for providing the repositories to the page. This is the only strict dependency taken by each page. This helps to decouple the pages from the repositories they require by putting an intermediate object in between the two. Any number of repositories can be consumed by each page, and the page's constructors will not need to be modified to consume a new repository. Furthermore, this allows the possibility for lazy repository creation, where it is only generated when it is needed.
 
 <img src="DI.png" alt="" title="Dependency Injection Design Pattern" />
 
@@ -70,4 +75,4 @@ refactoring can affect migrations from one design pattern to another
 as a project scales or changes scope.
 
 ## Appendix A
-<img src="ClassDiagram_Part3.pdf" title="Refactored Class Diagram" />
+
