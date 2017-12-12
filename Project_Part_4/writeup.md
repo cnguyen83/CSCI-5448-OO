@@ -30,4 +30,24 @@ We used xyz design patterns in our final prototype.
 
 ## What We Learned
 
-We learned xyz.
+One of the biggest things we learned about design and analysis through this
+project is how much thought, refinement, and refactoring goes into designing
+a resilient system. While the notion that computers do not execute procedures
+in the same was as humans has been reinforced since Intro to CS, the notion
+that abstract logic is expanded to encompass the entire system is really
+hammered home in this class.
+
+Additionally, we found the diagrams to be really burdensome in some ways, but
+ultimately they're extremely useful. Translating from a good diagram to code
+is very easy, and it makes the process very quick. However, it is a bit of
+a catch-22 while doing the diagrams, because as humans it is hard to imagine
+the whole system without having a working prototype to play with. As such,
+creating the diagrams the first time seemed to work in our heads and on
+paper, but it was hard to verify since we weren't used to diagrams, and we
+couldn't witness our ideas in action without a prototype yet. This catch-22
+really underlines why it's important to constantly refactor throughout
+the process. Even with refactoring though, the hardest part is ensuring
+that the user interface is stable and adhereing to open for extension,
+closed for modification. It would be interesting to explore further how
+refactoring can affect migrations from one design pattern to another
+as a project scales or changes scope.
