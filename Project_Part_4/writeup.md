@@ -36,9 +36,9 @@ The Third Meal
 | UR004 | Users should be able to cancel an active order | Orders |Customer | Medium |
 | UR006 | Users should be able to edit their profiles | Profile | Customer / Restaurant owner | High |
 | UR008 | Users should be able to update order status | Orders | Restaurant owner | High |
-| NF001 | Order confirmations should be sent in under 30s | Performance | Medium |
-| NF002 | Orders updates (to restaurants) should be accurate to 30s | Performance | Medium |
-| NF006 | UI should confirm order with customers before sending order to restaurant owners | UX | High |
+| NF001 | Order confirmations should be sent in under 30s | Performance | N/A | Medium |
+| NF002 | Orders updates (to restaurants) should be accurate to 30s | Performance | N/A | Medium |
+| NF006 | UI should confirm order with customers before sending order to restaurant owners | UX | N/A | High |
 
 ## Class Diagrams
 
