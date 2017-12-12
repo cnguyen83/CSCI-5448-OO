@@ -12,6 +12,15 @@ The Third Meal
 
 | ID | Requirement | Topic Area | Actor | Priority |
 | --- | --- | --- | --- | --- |
+| BR002 | Verify if a customer is genuine | Authentication | Customer | Medium |
+| BR006 | Track time to fulfillment | Orders | Restaurant owner / System | Low |
+| UR003 | Users should be able to add and edit menus for their restaurant | Store | Restaurant owner | High |
+| UR004 | Users should be able to cancel an active order | ORders |Customer / Restaurant owner | Medium |
+| UR006 | Users should be able to create and edit their profiles | Profile | Customer / Restaurant owner | High |
+| UR008 | Users should be able to update order status | OrdersUR | Restaurant owner | High |
+| NF003 | Accounts should be password-protected | Security | High |
+| NF004 | Data access should be well-segregated, allowing for database changes | Maintainabiliity | Medium |
+| NF005 | All transactions should be ACID compatible | Reliability | High |
 
 ## Features Not Implemented
 
