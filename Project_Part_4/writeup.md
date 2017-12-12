@@ -14,20 +14,31 @@ The Third Meal
 | --- | --- | --- | --- | --- |
 | BR002 | Verify if a customer is genuine | Authentication | Customer | Medium |
 | BR006 | Track time to fulfillment | Orders | Restaurant owner / System | Low |
+| UR001 | Users should be able to place an order for a specific restaurant | Orders | Customer | High |
+| UR002 | Users should be able to see all the current active orders | Orders | Restaurant owner / Customer | High |
 | UR003 | Users should be able to add and edit menus for their restaurant | Store | Restaurant owner | High |
-| UR004 | Users should be able to cancel an active order | Orders | Restaurant owner | Medium |
+| UR005 | Users should be able to declare if the restaurant is open or closed | Store | Restaurant owner | High |
 | UR006 | Users should be able to create their profiles | Profile | Customer / Restaurant owner | High |
-| UR008 | Users should be able to update order status | Orders | Restaurant owner | High |
-| NF003 | Accounts should be password-protected | Security | High |
-| NF004 | Data access should be well-segregated, allowing for database changes | Maintainabiliity | Medium |
-| NF005 | All transactions should be ACID compatible | Reliability | High |
+| UR007 | Users should be able to view a restaurant profile | Profile | Customer | High |
+| UR009 | Users should be able to search for a restaurant | Store | Customer | High |
+| NF003 | Accounts should be password-protected | Security | N/A | High |
+| NF004 | Data access should be well-segregated, allowing for database changes | Maintainabiliity | N/A | Medium |
+| NF005 | All transactions should be ACID compatible | Reliability | N/A | High |
 
 ## Features Not Implemented
 
 | ID | Requirement | Topic Area | Actor | Priority |
 | --- | --- | --- | --- | --- |
+| BR001 | Provide options for delivery or store pickup | Orders | Customer | High |
+| BR003 | Provide an option for payment methods | Orders / Payment | Restaurant owner | High |
+| BR004 | Track total number of orders | Orders | Restaurant owner / System | Low |
+| BR005 | Track total value of orders | Orders | Restaurant owner / System | High |
 | UR004 | Users should be able to cancel an active order | Orders |Customer | Medium |
 | UR006 | Users should be able to edit their profiles | Profile | Customer / Restaurant owner | High |
+| UR008 | Users should be able to update order status | Orders | Restaurant owner | High |
+| NF001 | Order confirmations should be sent in under 30s | Performance | N/A | Medium |
+| NF002 | Orders updates (to restaurants) should be accurate to 30s | Performance | N/A | Medium |
+| NF006 | UI should confirm order with customers before sending order to restaurant owners | UX | N/A | High |
 
 ## Class Diagrams
 
@@ -59,7 +70,13 @@ project is how much thought, refinement, and refactoring goes into designing
 a resilient system. While the notion that computers do not execute procedures
 in the same was as humans has been reinforced since Intro to CS, the notion
 that abstract logic is expanded to encompass the entire system is really
-hammered home in this class.
+hammered home in this class. Corrollary to that, it makes it clear just how
+difficult it is to design a complex system. We felt as if our diagrams and
+entities in our code were becoming unwieldy, yet we only implemeneted part
+of the features that we had intended to. Perhaps this could be changed
+by trying to move parts around and creating different groups / classes
+to nest things under in a way that is logical to a computer, rather than
+relying on human notions of what constitutes "similar attributes" in a "class."
 
 Additionally, we found the diagrams to be really burdensome in some ways, but
 ultimately they're extremely useful. Translating from a good diagram to code
